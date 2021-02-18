@@ -1,5 +1,24 @@
+@import './vars';
 .container {
 	width: 80%;
 	max-width: 1440px;
 	margin: auto;
+}
+
+.btn {
+	background: none;
+	border: none;
+	text-decoration: none;
+	color: white;
+	text-align: center;
+	padding: 4px;
+	border-radius: 5px;
+}
+
+.btnPrimary {
+	background-color: $primaryBlue;
+}
+
+body {
+	@include backgroundSVG;
 }

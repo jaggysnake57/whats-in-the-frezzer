@@ -1,1 +1,51 @@
 @import '../../../vars';
+
+.navbar {
+	background-color: $mainBlue;
+	color: $white;
+	a {
+		color: $white;
+		text-decoration: none;
+	}
+	.container {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		h1 {
+			margin-right: auto;
+		}
+	}
+	nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-right: 10%;
+		width: 30%;
+	}
+	.dropdown {
+		position: relative;
+
+		p {
+			cursor: pointer;
+		}
+		.dropdownLinks {
+			position: absolute;
+			display: flex;
+			flex-direction: column;
+			padding: 1rem;
+			background-color: $mainBlue;
+			min-width: 200px;
+			left: -50%;
+			margin-right: 50%;
+			display: none;
+		}
+	}
+	.userMini {
+		display: flex;
+		align-items: center;
+		img {
+			width: 30px;
+			margin-left: 1rem;
+		}
+	}
+}

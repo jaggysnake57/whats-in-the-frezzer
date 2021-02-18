@@ -1,1 +1,34 @@
-
+.itemsList .toolbar {
+  display: flex;
+  justify-content: space-between;
+}
+.itemsList .filtersBar {
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+}
+.itemsList .itemRow {
+  display: grid;
+  grid-template-columns: 3fr 3fr 2fr 1fr 0.5fr;
+  align-items: center;
+  background-color: #5394df;
+  color: #f4faff;
+  padding: 1rem 0.5rem;
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+.itemsList .itemRow:nth-child(2) {
+  background-color: #f4faff;
+  color: #08090a;
+}
+.itemsList .itemAmount {
+  display: flex;
+  align-items: center;
+}
+.itemsList .itemAmount p {
+  margin: 0 1.5rem;
+}
+.itemsList .itemAmount svg {
+  font-size: 1.2rem;
+  cursor: pointer;
+}

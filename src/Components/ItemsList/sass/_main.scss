@@ -1,1 +1,39 @@
 @import '../../../vars';
+
+.itemsList {
+	.toolbar {
+		display: flex;
+		justify-content: space-between;
+	}
+	.filtersBar {
+		display: flex;
+		justify-content: space-between;
+		width: 60%;
+	}
+
+	.itemRow {
+		display: grid;
+		grid-template-columns: 3fr 3fr 2fr 1fr 0.5fr;
+		align-items: center;
+		background-color: $mainBlue;
+		color: $white;
+		padding: 1rem 0.5rem;
+		font-size: 1.2rem;
+		margin-bottom: 5px;
+		&:nth-child(2) {
+			background-color: $white;
+			color: $black;
+		}
+	}
+	.itemAmount {
+		display: flex;
+		align-items: center;
+		p {
+			margin: 0 1.5rem;
+		}
+		svg {
+			font-size: 1.2rem;
+			cursor: pointer;
+		}
+	}
+}

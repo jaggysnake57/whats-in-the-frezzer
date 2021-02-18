@@ -28,17 +28,17 @@ function App() {
 
 	return (
 		<div className="App">
-			<div className="container">
-				<Router>
-					<Login />
-					<Navbar />
+			<Router>
+				<Navbar />
+				<div className="container">
+					{!username ? <Login /> : null}
 					<Switch>
 						<Route exact path="/">
 							<Home />
 						</Route>
 					</Switch>
-				</Router>
-			</div>
+				</div>
+			</Router>
 		</div>
 	);
 }

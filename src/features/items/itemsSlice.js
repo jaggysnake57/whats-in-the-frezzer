@@ -28,7 +28,11 @@ export const getAllUsersItems = (id) => async (dispatch) => {
 		} else {
 			let tempItems = [];
 			data.docs.map((item) => {
-				tempItems.push(item.data());
+				const newItem = {
+					id: item.id,
+					...item.data(),
+				};
+				tempItems.push(newItem);
 			});
 			dispatch(setItems(tempItems));
 		}
