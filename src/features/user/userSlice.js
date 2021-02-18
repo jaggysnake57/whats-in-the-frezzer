@@ -5,6 +5,7 @@ export const userSlice = createSlice({
 	name: 'user',
 	initialState: {
 		UUID: '',
+		userDocId: '',
 		username: '',
 		name: {
 			first: '',
@@ -15,6 +16,7 @@ export const userSlice = createSlice({
 	},
 	reducers: {
 		setUser: (state, action) => {
+			console.log(action.payload);
 			const {
 				UUID,
 				username,
@@ -22,12 +24,13 @@ export const userSlice = createSlice({
 				firstName,
 				lastName,
 				avatar,
-			} = action.payload;
+			} = action.payload.userData;
 			state.UUID = UUID;
 			state.username = username;
 			state.name.first = firstName;
 			state.name.last = lastName;
 			state.avatar = avatar;
+			state.userDocId = action.payload.userId;
 		},
 	},
 });
@@ -45,7 +48,12 @@ export const getUser = () => async (dispatch) => {
 			console.log('nothing found');
 		} else {
 			data.docs.map((user) => {
-				dispatch(setUser(user.data()));
+				dispatch(
+					setUser({
+						userId: user.id,
+						userData: user.data(),
+					})
+				);
 			});
 		}
 
