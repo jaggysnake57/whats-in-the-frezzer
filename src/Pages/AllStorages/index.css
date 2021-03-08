@@ -1,4 +1,42 @@
 .allStorages .row {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 3fr 3fr 2fr 1fr;
+  align-items: center;
+  background-color: #5394df;
+  color: #f4faff;
+  padding: 1rem 0.5rem;
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+.allStorages .row:nth-child(2n) {
+  background-color: #f4faff;
+  color: #08090a;
+}
+.allStorages .row:nth-child(2n) .shelves {
+  background-color: #f4faff;
+  color: #08090a;
+}
+.allStorages .row h2 {
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+.allStorages .shelfNamesContainer p {
+  cursor: pointer;
+  position: relative;
+}
+.allStorages .shelves {
+  display: none;
+  position: absolute;
+  list-style: none;
+  background-color: #5394df;
+  color: #f4faff;
+  z-index: 2;
+  padding: 1rem;
+  padding-right: 5rem;
+}
+.allStorages .shelves li {
+  margin-bottom: 0.5rem;
+}
+.allStorages .open {
+  display: block;
 }

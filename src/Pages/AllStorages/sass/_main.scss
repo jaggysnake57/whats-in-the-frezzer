@@ -3,6 +3,48 @@
 .allStorages {
 	.row {
 		display: grid;
-		grid-template-columns: 1fr 1fr 1fr 1fr;
+		grid-template-columns: 3fr 3fr 2fr 1fr;
+		align-items: center;
+		background-color: $mainBlue;
+		color: $white;
+		padding: 1rem 0.5rem;
+		font-size: 1.2rem;
+		margin-bottom: 5px;
+		&:nth-child(2n) {
+			background-color: $white;
+			color: $black;
+			.shelves {
+				background-color: $white;
+				color: $black;
+			}
+		}
+		h2 {
+			font-weight: 400;
+			font-size: 1.2rem;
+		}
+	}
+	.shelfNamesContainer {
+		p {
+			cursor: pointer;
+			position: relative;
+		}
+	}
+	.shelves {
+		display: none;
+		position: absolute;
+		list-style: none;
+		background-color: $mainBlue;
+		color: $white;
+		z-index: 2;
+
+		padding: 1rem;
+		padding-right: 5rem;
+
+		li {
+			margin-bottom: 0.5rem;
+		}
+	}
+	.open {
+		display: block;
 	}
 }
