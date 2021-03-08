@@ -7,14 +7,18 @@ import Home from './Pages/Home/Home';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser, selectUser } from './features/user/userSlice';
-import { getAllUsersItems } from './features/items/itemsSlice';
+import { getAllUsersItems, selectItems } from './features/items/itemsSlice';
 import Login from './Pages/Login/Login';
 import Navbar from './Components/Navbar/Navbar';
+import NewItem from './Pages/NewItem/NewItem';
+import ItemEdit from './Pages/ItemEdit/ItemEdit';
+import AllStorages from './Pages/AllStorages/AllStorages';
 
 function App() {
 	const [items, setItems] = useState({});
 	const dispatch = useDispatch();
-	const { username, name, avatar, userDocId } = useSelector(selectUser);
+	const { username, userDocId } = useSelector(selectUser);
+	const { message, error } = useSelector(selectItems);
 
 	const handleUser = () => {
 		dispatch(getUser());
@@ -30,11 +34,24 @@ function App() {
 		<div className="App">
 			<Router>
 				<Navbar />
+				<div className="message">
+					{message}
+					{error?.message}
+				</div>
 				<div className="container">
 					{!username ? <Login /> : null}
 					<Switch>
 						<Route exact path="/">
 							<Home />
+						</Route>
+						<Route exact path="/items/new">
+							<NewItem />
+						</Route>
+						<Route path="/items/:id">
+							<ItemEdit />
+						</Route>
+						<Route exact path="/storages">
+							<AllStorages />
 						</Route>
 					</Switch>
 				</div>

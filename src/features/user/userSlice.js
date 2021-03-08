@@ -16,7 +16,6 @@ export const userSlice = createSlice({
 	},
 	reducers: {
 		setUser: (state, action) => {
-			console.log(action.payload);
 			const {
 				UUID,
 				username,

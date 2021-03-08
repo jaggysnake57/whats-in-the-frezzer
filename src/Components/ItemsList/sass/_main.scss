@@ -20,7 +20,7 @@
 		padding: 1rem 0.5rem;
 		font-size: 1.2rem;
 		margin-bottom: 5px;
-		&:nth-child(2) {
+		&:nth-child(2n) {
 			background-color: $white;
 			color: $black;
 		}

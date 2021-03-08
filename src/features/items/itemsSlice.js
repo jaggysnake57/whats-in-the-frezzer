@@ -5,18 +5,25 @@ export const itemsSlice = createSlice({
 	name: 'items',
 	initialState: {
 		items: [],
+		message: '',
+		error: {},
 	},
 	reducers: {
 		setItems: (state, action) => {
 			state.items = action.payload;
 		},
+		setMessage: (state, action) => {
+			state.message = action.payload;
+		},
+		setError: (state, action) => {
+			state.error = action.payload;
+		},
 	},
 });
 
-export const { setItems } = itemsSlice.actions;
+export const { setItems, setMessage, setError } = itemsSlice.actions;
 
 export const getAllUsersItems = (id) => async (dispatch) => {
-	console.log('get all users');
 	try {
 		const data = await db
 			.collection('users')
@@ -28,16 +35,48 @@ export const getAllUsersItems = (id) => async (dispatch) => {
 		} else {
 			let tempItems = [];
 			data.docs.map((item) => {
-				const newItem = {
-					id: item.id,
+				tempItems.push({
 					...item.data(),
-				};
-				tempItems.push(newItem);
+					id: item.id,
+				});
 			});
 			dispatch(setItems(tempItems));
 		}
 	} catch (err) {
 		console.log(err);
+	}
+};
+
+export const addNewItem = (user, newItem) => async (dispatch) => {
+	try {
+		if (!user) {
+			throw { code: 501, message: 'no user provided, please log in' };
+		}
+		const res = await db
+			.collection('users')
+			.doc(user)
+			.collection('items')
+			.add(newItem);
+		dispatch(setMessage('New Item Added'));
+		dispatch(getAllUsersItems(user));
+	} catch (err) {
+		console.log(err);
+		dispatch(setError(err));
+	}
+};
+
+export const updateItem = (user, itemId, item) => async (dispatch) => {
+	try {
+		const res = await db
+			.collection('users')
+			.doc(user)
+			.collection('items')
+			.doc(itemId)
+			.set(item);
+		dispatch(setMessage(`The item ${item.name} has been updated`));
+		dispatch(getAllUsersItems(user));
+	} catch (err) {
+		dispatch(setError(err));
 	}
 };
 

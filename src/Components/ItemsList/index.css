@@ -17,7 +17,7 @@
   font-size: 1.2rem;
   margin-bottom: 5px;
 }
-.itemsList .itemRow:nth-child(2) {
+.itemsList .itemRow:nth-child(2n) {
   background-color: #f4faff;
   color: #08090a;
 }

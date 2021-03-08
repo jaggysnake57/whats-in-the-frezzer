@@ -17,14 +17,14 @@ const Navbar = () => {
 						<p>Items</p>
 						<div className="dropdownLinks">
 							<Link to="/items">View All Items</Link>
-							<Link to="/items/add">Add New Item</Link>
+							<Link to="/items/new">Add New Item</Link>
 						</div>
 					</div>
 					<div className="dropdown">
 						<p>Storages</p>
 						<div className="dropdownLinks">
 							<Link to="/storages">View All Storages</Link>
-							<Link to="/storages/add">Add New Storage</Link>
+							<Link to="/storages/new">Add New Storage</Link>
 						</div>
 					</div>
 				</nav>
