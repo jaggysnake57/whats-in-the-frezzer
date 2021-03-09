@@ -1,18 +1,23 @@
-import './App.css';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
-import { db } from './firebase';
-import firebase from 'firebase';
-import Home from './Pages/Home/Home';
+// react
 import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+//redux
 import { useDispatch, useSelector } from 'react-redux';
+//slices
 import { getUser, selectUser } from './features/user/userSlice';
 import { getAllUsersItems, selectItems } from './features/items/itemsSlice';
-import Login from './Pages/Login/Login';
-import Navbar from './Components/Navbar/Navbar';
+import { getAllUsersStorages } from './features/storages/storageSlice';
+//pages
 import NewItem from './Pages/NewItem/NewItem';
 import ItemEdit from './Pages/ItemEdit/ItemEdit';
 import AllStorages from './Pages/AllStorages/AllStorages';
+import NewStorage from './Pages/NewStorage/NewStorage';
+import Home from './Pages/Home/Home';
+import Login from './Pages/Login/Login';
+//components
+import Navbar from './Components/Navbar/Navbar';
+//css
+import './App.css';
 
 function App() {
 	const [items, setItems] = useState({});
@@ -27,6 +32,7 @@ function App() {
 	useEffect(() => {
 		if (userDocId) {
 			dispatch(getAllUsersItems(userDocId));
+			dispatch(getAllUsersStorages(userDocId));
 		}
 	}, [userDocId]);
 
@@ -52,6 +58,9 @@ function App() {
 						</Route>
 						<Route exact path="/storages">
 							<AllStorages />
+						</Route>
+						<Route exact path="/storages/new">
+							<NewStorage />
 						</Route>
 					</Switch>
 				</div>
