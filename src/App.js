@@ -18,6 +18,7 @@ import Login from './Pages/Login/Login';
 import Navbar from './Components/Navbar/Navbar';
 //css
 import './App.css';
+import StorageEdit from './Pages/StorageEdit/StorageEdit';
 
 function App() {
 	const [items, setItems] = useState({});
@@ -61,6 +62,9 @@ function App() {
 						</Route>
 						<Route exact path="/storages/new">
 							<NewStorage />
+						</Route>
+						<Route exact path="/storages/:id">
+							<StorageEdit />
 						</Route>
 					</Switch>
 				</div>

@@ -61,5 +61,24 @@ export const addNewStorage = (id, newStorage) => async (dispatch) => {
 	}
 };
 
+export const editStorage = (userID, storageID, editedStorage) => async (
+	dispatch
+) => {
+	try {
+		console.log({ editedStorage });
+		const res = await db
+			.collection('users')
+			.doc(userID)
+			.collection('location')
+			.doc(storageID)
+			.set(editedStorage);
+		dispatch(getAllUsersStorages);
+
+		console.log(editedStorage.name, 'has been edited');
+	} catch (err) {
+		console.log(err);
+	}
+};
+
 export const selectStorages = (state) => state.storage;
 export default storageSlice.reducer;

@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addNewStorage } from '../../features/storages/storageSlice';
+import {
+	addNewStorage,
+	editStorage,
+} from '../../features/storages/storageSlice';
 import { selectUser } from '../../features/user/userSlice';
 import './index.css';
 
-const StorageForm = () => {
+const StorageForm = ({ editable, id, editableStorage }) => {
 	const dispatch = useDispatch();
 	const { userDocId } = useSelector(selectUser);
 
@@ -23,6 +26,7 @@ const StorageForm = () => {
 					type="text"
 					placeholder={`shelf number ${i} name`}
 					onChange={(e) => handleShelfNameChange(e, i)}
+					value={shelfNamesValue[i]}
 				/>
 			);
 			shelfNamesTempState = {
@@ -43,24 +47,55 @@ const StorageForm = () => {
 		});
 	};
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
+	const prepStorageForDB = () => {
 		if (nameValue && shelfNumberValue) {
-			let newStorage = {
+			let tempStore = {
 				name: nameValue,
 				shelfNum: shelfNumberValue,
 				shelves: [],
 			};
 			for (const [key, value] of Object.entries(shelfNamesValue)) {
-				newStorage.shelves.push(value);
+				tempStore.shelves.push(value);
 			}
-			dispatch(addNewStorage(userDocId, newStorage));
+			return tempStore;
+		} else {
+			alert('please check the form ');
+			return false;
+		}
+	};
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		const newStorageData = prepStorageForDB();
+		if (newStorageData) {
+			if (editable) {
+				dispatch(editStorage(userDocId, id, newStorageData));
+			} else {
+				dispatch(addNewStorage(userDocId, newStorageData));
+			}
+		} else {
+			console.log(false);
 		}
 	};
 
 	useEffect(() => {
 		setShelfJSX(showShelfNameForm());
 	}, [shelfNumberValue]);
+
+	useEffect(() => {
+		if (editable) {
+			const { name, shelfNum, shelves } = editableStorage;
+			setNameValue(name);
+			setShelfNumberValue(shelfNum);
+			shelves?.map((shelfName, i) => {
+				setShelfNamesValue((prevValues) => {
+					return {
+						...prevValues,
+						[i + 1]: shelfName,
+					};
+				});
+			});
+		}
+	}, [editableStorage]);
 
 	return (
 		<div className="storageForm">
