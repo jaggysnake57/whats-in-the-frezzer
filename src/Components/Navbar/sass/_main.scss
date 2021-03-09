@@ -32,12 +32,17 @@
 			position: absolute;
 			display: flex;
 			flex-direction: column;
+			align-items: center;
 			padding: 1rem;
 			background-color: $mainBlue;
 			min-width: 200px;
-			left: -50%;
-			margin-right: 50%;
-			// display: none;
+			left: 50%;
+			margin-left: -100px;
+			top: -400%;
+			z-index: 5;
+		}
+		.open {
+			top: 170%;
 		}
 	}
 	.userMini {

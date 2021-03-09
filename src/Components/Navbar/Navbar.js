@@ -1,11 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { selectUser } from '../../features/user/userSlice';
 import './index.css';
 
 const Navbar = () => {
 	const { username, avatar } = useSelector(selectUser);
+	const [itemsDropdownOpen, setItemsDropdownOpen] = useState(false);
+	const [storagesDropdownOpen, setStoragesDropdownOpen] = useState(false);
+	const history = useHistory();
+
+	history.listen((location, action) => {
+		setStoragesDropdownOpen(false);
+		setItemsDropdownOpen(false);
+	});
+
+	const handleDropdownToggles = (dropdown) => {
+		switch (dropdown) {
+			case 'items':
+				setItemsDropdownOpen(!itemsDropdownOpen);
+				break;
+			case 'storages':
+				setStoragesDropdownOpen(!storagesDropdownOpen);
+				break;
+
+			default:
+				break;
+		}
+	};
+
 	return (
 		<div className="navbar">
 			<div className="container">
@@ -14,15 +37,25 @@ const Navbar = () => {
 					<Link to="/">Home</Link>
 
 					<div className="dropdown">
-						<p>Items</p>
-						<div className="dropdownLinks">
+						<p onClick={() => handleDropdownToggles('items')}>
+							Items
+						</p>
+						<div
+							className={`dropdownLinks ${
+								itemsDropdownOpen ? 'open' : ''
+							}`}>
 							<Link to="/items">View All Items</Link>
 							<Link to="/items/new">Add New Item</Link>
 						</div>
 					</div>
 					<div className="dropdown">
-						<p>Storages</p>
-						<div className="dropdownLinks">
+						<p onClick={() => handleDropdownToggles('storages')}>
+							Storages
+						</p>
+						<div
+							className={`dropdownLinks ${
+								storagesDropdownOpen ? 'open' : ''
+							}`}>
 							<Link to="/storages">View All Storages</Link>
 							<Link to="/storages/new">Add New Storage</Link>
 						</div>
