@@ -1,0 +1,33 @@
+.storageForm form {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  max-width: 1000px;
+  margin: 3rem auto;
+}
+.storageForm form input[type=text],
+.storageForm form input[type=number],
+.storageForm form select {
+  background-color: #5394df;
+  color: #f4faff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.3rem;
+  padding: 0.5rem;
+  margin-bottom: 3rem;
+}
+.storageForm form select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  margin-bottom: 0;
+}
+.storageForm form select:focus {
+  border: none;
+}
+.storageForm form .btn {
+  width: 200px;
+  margin-left: auto;
+  font-size: 1.5rem;
+}

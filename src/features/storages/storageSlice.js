@@ -47,5 +47,19 @@ export const getAllUsersStorages = (id) => async (dispatch) => {
 	}
 };
 
+export const addNewStorage = (id, newStorage) => async (dispatch) => {
+	try {
+		const res = await db
+			.collection('users')
+			.doc(id)
+			.collection('location')
+			.add(newStorage);
+		dispatch(setMessage('new storage added'));
+		dispatch(getAllUsersStorages(id));
+	} catch (err) {
+		console.log(err);
+	}
+};
+
 export const selectStorages = (state) => state.storage;
 export default storageSlice.reducer;
