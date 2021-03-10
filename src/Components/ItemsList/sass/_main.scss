@@ -1,16 +1,6 @@
 @import '../../../vars';
 
 .itemsList {
-	.toolbar {
-		display: flex;
-		justify-content: space-between;
-	}
-	.filtersBar {
-		display: flex;
-		justify-content: space-between;
-		width: 60%;
-	}
-
 	.itemRow {
 		display: grid;
 		grid-template-columns: 3fr 3fr 2fr 1fr 0.5fr;

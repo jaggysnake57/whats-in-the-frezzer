@@ -7,6 +7,8 @@ export const itemsSlice = createSlice({
 		items: [],
 		message: '',
 		error: {},
+		filteredItems: [],
+		filtered: false,
 	},
 	reducers: {
 		setItems: (state, action) => {
@@ -18,10 +20,22 @@ export const itemsSlice = createSlice({
 		setError: (state, action) => {
 			state.error = action.payload;
 		},
+		setFilteredItems: (state, action) => {
+			state.filteredItems = action.payload;
+		},
+		setFiltered: (state, action) => {
+			state.filtered = action.payload;
+		},
 	},
 });
 
-export const { setItems, setMessage, setError } = itemsSlice.actions;
+export const {
+	setItems,
+	setMessage,
+	setError,
+	setFilteredItems,
+	setFiltered,
+} = itemsSlice.actions;
 
 export const getAllUsersItems = (id) => async (dispatch) => {
 	try {
@@ -79,6 +93,15 @@ export const updateItem = (user, itemId, item) => async (dispatch) => {
 		dispatch(setError(err));
 	}
 };
+
+// export const filterItems = (filters) => async (dispatch) => {
+
+// 	const filteredItems = state.items.filter((item) => {
+// 		if (filters.search && items.name.search(filters.search)) {
+// 			console.log('search found');
+// 		}
+// 	});
+// };
 
 export const selectItems = (state) => state.items;
 export default itemsSlice.reducer;

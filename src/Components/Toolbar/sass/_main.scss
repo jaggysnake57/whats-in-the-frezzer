@@ -1,0 +1,55 @@
+@import '../../../vars';
+.toolbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1rem;
+	.searchBar {
+		width: 40%;
+	}
+	.searchInput {
+		padding: 0.5rem;
+		width: 90%;
+		border: none;
+		border-radius: 100px;
+		background: none;
+		background-color: $mainBlue;
+		font-size: 1rem;
+		color: $white;
+	}
+	.filterBar {
+		display: flex;
+		justify-content: space-between;
+		width: 60%;
+	}
+	.checkWrapper {
+		position: relative;
+		input {
+			appearance: none;
+		}
+	}
+	.checkLabel {
+		&::before {
+			content: '';
+			width: 20px;
+			height: 20px;
+			border: solid 1px black;
+			border-radius: 3px;
+			position: absolute;
+			right: -20%;
+		}
+		&::after {
+			content: '';
+			background-image: url('../../images/tick.svg');
+			width: 18px;
+			height: 18px;
+			position: absolute;
+			right: -18.5%;
+			top: 10%;
+			display: none;
+		}
+	}
+	input[type='checkbox']:checked + .checkLabel::after {
+		display: block;
+	}
+}
