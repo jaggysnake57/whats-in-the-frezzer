@@ -71,23 +71,45 @@ const ItemForm = ({ editable }) => {
 			);
 		}
 	};
+
+	const populateEditableFields = () => {
+		items.map((item) => {
+			if (id === item.id) {
+				setNameValue(item.name);
+				if (item.packSizeAMT) {
+					setPackSizeValue(item.packSizeAMT);
+				} else {
+					setPackSizeValue(item.packSizeWGT);
+					setCheckboxValue(true);
+				}
+				setQuantityValue(item.quantity);
+				setStoredInValue(item.storedInName);
+				setDrawValue(item.draw);
+			}
+		});
+	};
+
+	const handleReset = (event) => {
+		event.preventDefault();
+		console.log('clicked');
+
+		if (editable) {
+			populateEditableFields();
+			console.log('editable');
+		} else {
+			setNameValue('');
+			setPackSizeValue('');
+			setQuantityValue('');
+			setPackSizeValue('');
+			setCheckboxValue(false);
+			console.log('not editable');
+		}
+	};
+
 	// use effects
 	useEffect(() => {
 		if (editable) {
-			items.map((item) => {
-				if (id === item.id) {
-					setNameValue(item.name);
-					if (item.packSizeAMT) {
-						setPackSizeValue(item.packSizeAMT);
-					} else {
-						setPackSizeValue(item.packSizeWGT);
-						setCheckboxValue(true);
-					}
-					setQuantityValue(item.quantity);
-					setStoredInValue(item.storedInName);
-					setDrawValue(item.draw);
-				}
-			});
+			populateEditableFields();
 		}
 	}, []);
 
@@ -96,7 +118,6 @@ const ItemForm = ({ editable }) => {
 		if (storedInValue) {
 			storages.map((storage) => {
 				if (storedInValue === storage.name) {
-					console.log('hello');
 					setCurrentShelves(storage.shelves);
 					return;
 				}
@@ -183,7 +204,14 @@ const ItemForm = ({ editable }) => {
 							<option value="">none</option>
 						</select>
 					</div>
-					<button className="btn btnPrimary">Submit</button>
+					<div className="buttons">
+						<button
+							onClick={(e) => handleReset(e)}
+							className="btn btnWarning">
+							reset
+						</button>
+						<button className="btn btnPrimary">Submit</button>
+					</div>
 				</form>
 			</div>
 		</div>

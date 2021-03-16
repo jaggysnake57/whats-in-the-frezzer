@@ -18,6 +18,9 @@
 .btnPrimary {
 	background-color: $primaryBlue;
 }
+.btnWarning {
+	background-color: $warningYellow;
+}
 
 body {
 	@include backgroundSVG;

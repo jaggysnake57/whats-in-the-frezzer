@@ -4,4 +4,43 @@
 	h3 {
 		margin-bottom: 2rem;
 	}
+	.buttons {
+		margin-left: auto;
+	}
+	.btn {
+		margin-left: 1rem;
+	}
+	form {
+		display: flex;
+		flex-direction: column;
+		width: 60%;
+		max-width: 1000px;
+		margin: 3rem auto;
+		input[type='text'],
+		input[type='number'],
+		select {
+			background-color: $mainBlue;
+			color: $white;
+			border: none;
+			border-radius: 5px;
+			font-size: 1.3rem;
+			padding: 0.5rem;
+			margin-bottom: 3rem;
+		}
+		select {
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+			width: 100%;
+			margin-bottom: 0;
+			&:focus {
+				border: none;
+			}
+		}
+		.btn {
+			width: 200px;
+
+			font-size: 1.5rem;
+		}
+	}
 }

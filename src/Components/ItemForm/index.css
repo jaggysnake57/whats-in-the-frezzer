@@ -46,9 +46,12 @@
 .itemForm form select:focus {
   border: none;
 }
+.itemForm form .buttons {
+  margin-left: auto;
+}
 .itemForm form .btn {
   width: 200px;
-  margin-left: auto;
+  margin-left: 1rem;
   font-size: 1.5rem;
 }
 .itemForm form .selectWrapper {

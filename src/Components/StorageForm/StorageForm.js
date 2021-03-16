@@ -83,6 +83,31 @@ const StorageForm = ({ editable, id, editableStorage }) => {
 			console.log(false);
 		}
 	};
+
+	const populateEditableFields = () => {
+		const { name, shelfNum, shelves } = editableStorage;
+		setNameValue(name);
+		setShelfNumberValue(shelfNum);
+		shelves?.map((shelfName, i) => {
+			setShelfNamesValue((prevValues) => {
+				return {
+					...prevValues,
+					[i + 1]: shelfName,
+				};
+			});
+		});
+	};
+
+	const handleReset = (event) => {
+		event.preventDefault();
+		if (editable) {
+			//do code
+			populateEditableFields();
+		} else {
+			setShelfNumberValue('');
+			setNameValue('');
+		}
+	};
 	// useEffects
 
 	//shelf jsx effect
@@ -93,17 +118,18 @@ const StorageForm = ({ editable, id, editableStorage }) => {
 	// populate fields if the form is editable
 	useEffect(() => {
 		if (editable) {
-			const { name, shelfNum, shelves } = editableStorage;
-			setNameValue(name);
-			setShelfNumberValue(shelfNum);
-			shelves?.map((shelfName, i) => {
-				setShelfNamesValue((prevValues) => {
-					return {
-						...prevValues,
-						[i + 1]: shelfName,
-					};
-				});
-			});
+			// const { name, shelfNum, shelves } = editableStorage;
+			// setNameValue(name);
+			// setShelfNumberValue(shelfNum);
+			// shelves?.map((shelfName, i) => {
+			// 	setShelfNamesValue((prevValues) => {
+			// 		return {
+			// 			...prevValues,
+			// 			[i + 1]: shelfName,
+			// 		};
+			// 	});
+			// });
+			populateEditableFields();
 		}
 	}, [editableStorage]);
 
@@ -126,7 +152,14 @@ const StorageForm = ({ editable, id, editableStorage }) => {
 					/>
 					{shelfJSX.length ? <h3>Shelf Names</h3> : ''}
 					{shelfJSX}
-					<button className="btn btnPrimary">Submit</button>
+					<div className="buttons">
+						<button
+							onClick={(e) => handleReset(e)}
+							className="btn btnWarning">
+							Reset
+						</button>
+						<button className="btn btnPrimary">Submit</button>
+					</div>
 				</form>
 			</div>
 		</div>

@@ -49,9 +49,12 @@
 				border: none;
 			}
 		}
+		.buttons {
+			margin-left: auto;
+		}
 		.btn {
 			width: 200px;
-			margin-left: auto;
+			margin-left: 1rem;
 			font-size: 1.5rem;
 		}
 		.selectWrapper {
