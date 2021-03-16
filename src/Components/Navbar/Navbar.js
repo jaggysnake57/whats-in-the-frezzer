@@ -19,9 +19,11 @@ const Navbar = () => {
 		switch (dropdown) {
 			case 'items':
 				setItemsDropdownOpen(!itemsDropdownOpen);
+				setStoragesDropdownOpen(false);
 				break;
 			case 'storages':
 				setStoragesDropdownOpen(!storagesDropdownOpen);
+				setItemsDropdownOpen(false);
 				break;
 
 			default:
