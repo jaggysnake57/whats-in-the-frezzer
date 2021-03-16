@@ -1,5 +1,7 @@
+//react
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+//redux
 import {
 	addNewItem,
 	getAllUsersItems,
@@ -8,16 +10,22 @@ import {
 	updateItem,
 } from '../../features/items/itemsSlice';
 import { selectUser } from '../../features/user/userSlice';
-import './index.css';
+import { selectStorages } from '../../features/storages/storageSlice';
+//icons
 import { BiDownArrow } from 'react-icons/bi';
 import { useParams } from 'react-router-dom';
+//stylesheets
+import './index.css';
 
 const ItemForm = ({ editable }) => {
-	const { userDocId } = useSelector(selectUser);
-	const { items } = useSelector(selectItems);
+	//hooks
 	const dispatch = useDispatch();
 	const { id } = useParams();
-
+	// slices
+	const { userDocId } = useSelector(selectUser);
+	const { items } = useSelector(selectItems);
+	const { storages } = useSelector(selectStorages);
+	//state
 	const [nameValue, setNameValue] = useState('');
 	const [packSizeValue, setPackSizeValue] = useState('');
 	const [quantityValue, setQuantityValue] = useState('');
@@ -25,7 +33,8 @@ const ItemForm = ({ editable }) => {
 	const [drawValue, setDrawValue] = useState('');
 	const [checkboxValue, setCheckboxValue] = useState(false);
 	const [formError, setFormError] = useState('');
-
+	const [currentShelves, setCurrentShelves] = useState([]);
+	//functions
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (nameValue && packSizeValue) {
@@ -62,7 +71,7 @@ const ItemForm = ({ editable }) => {
 			);
 		}
 	};
-
+	// use effects
 	useEffect(() => {
 		if (editable) {
 			items.map((item) => {
@@ -81,6 +90,20 @@ const ItemForm = ({ editable }) => {
 			});
 		}
 	}, []);
+
+	useEffect(() => {
+		//if there is a stored in value
+		if (storedInValue) {
+			storages.map((storage) => {
+				if (storedInValue === storage.name) {
+					console.log('hello');
+					setCurrentShelves(storage.shelves);
+					return;
+				}
+			});
+		}
+		//if so find storage and get shelves add to state
+	}, [storedInValue]);
 
 	return (
 		<div className="itemForm">
@@ -131,15 +154,15 @@ const ItemForm = ({ editable }) => {
 							<option value="" disabled selected>
 								Stored in
 							</option>
-							<option
-								value="big freezer"
-								selected={
-									storedInValue === 'big freezer'
-										? true
-										: false
-								}>
-								Big freezer
-							</option>
+							{storages?.map((s) => (
+								<option
+									value={s.name}
+									selected={
+										storedInValue === s.name ? true : false
+									}>
+									{s.name}
+								</option>
+							))}
 						</select>
 					</div>
 					<div className="selectWrapper">
@@ -148,21 +171,16 @@ const ItemForm = ({ editable }) => {
 							<option value="" disabled selected>
 								Draw/shelf
 							</option>
-							<option
-								value="1"
-								selected={drawValue === '1' ? true : false}>
-								1
-							</option>
-							<option
-								value="2"
-								selected={drawValue === '2' ? true : false}>
-								2
-							</option>
-							<option
-								value="3"
-								selected={drawValue === '3' ? true : false}>
-								3
-							</option>
+							{currentShelves.map((shelf, i) => (
+								<option
+									value={shelf ? shelf : i + 1}
+									selected={
+										drawValue === shelf ? true : false
+									}>
+									{shelf ? shelf : `shelf ${i + 1}`}
+								</option>
+							))}
+							<option value="">none</option>
 						</select>
 					</div>
 					<button className="btn btnPrimary">Submit</button>
