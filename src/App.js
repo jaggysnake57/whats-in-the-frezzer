@@ -1,6 +1,11 @@
 // react
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+	BrowserRouter as Router,
+	Route,
+	Switch,
+	useHistory,
+} from 'react-router-dom';
 //redux
 import { useDispatch, useSelector } from 'react-redux';
 //slices
@@ -14,17 +19,19 @@ import AllStorages from './Pages/AllStorages/AllStorages';
 import NewStorage from './Pages/NewStorage/NewStorage';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
+import StorageEdit from './Pages/StorageEdit/StorageEdit';
 //components
 import Navbar from './Components/Navbar/Navbar';
+import AllItems from './Pages/AllItems/AllItems';
 //css
 import './App.css';
-import StorageEdit from './Pages/StorageEdit/StorageEdit';
 
 function App() {
 	const [items, setItems] = useState({});
 	const dispatch = useDispatch();
 	const { username, userDocId } = useSelector(selectUser);
 	const { message, error } = useSelector(selectItems);
+	const history = useHistory();
 
 	const handleUser = () => {
 		dispatch(getUser());
@@ -34,41 +41,49 @@ function App() {
 		if (userDocId) {
 			dispatch(getAllUsersItems(userDocId));
 			dispatch(getAllUsersStorages(userDocId));
+			history.push('/');
+		} else {
+			history.push('/login');
 		}
 	}, [userDocId]);
 
 	return (
 		<div className="App">
-			<Router>
-				<Navbar />
-				<div className="message">
-					{message}
-					{error?.message}
-				</div>
-				<div className="container">
-					{!username ? <Login /> : null}
-					<Switch>
-						<Route exact path="/">
-							<Home />
-						</Route>
-						<Route exact path="/items/new">
-							<NewItem />
-						</Route>
-						<Route path="/items/:id">
-							<ItemEdit />
-						</Route>
-						<Route exact path="/storages">
-							<AllStorages />
-						</Route>
-						<Route exact path="/storages/new">
-							<NewStorage />
-						</Route>
-						<Route exact path="/storages/:id">
-							<StorageEdit />
-						</Route>
-					</Switch>
-				</div>
-			</Router>
+			<Navbar />
+			<div className="message">
+				{message}
+				{error?.message}
+			</div>
+			<div className="container">
+				{/* {!username ? <Login /> : null} */}
+				<Switch>
+					<Route exact path="/">
+						<Home />
+					</Route>
+					<Route exact path="/login">
+						<Login />
+					</Route>
+
+					<Route exact path="/items">
+						<AllItems />
+					</Route>
+					<Route exact path="/items/new">
+						<NewItem />
+					</Route>
+					<Route path="/items/:id">
+						<ItemEdit />
+					</Route>
+					<Route exact path="/storages">
+						<AllStorages />
+					</Route>
+					<Route exact path="/storages/new">
+						<NewStorage />
+					</Route>
+					<Route exact path="/storages/:id">
+						<StorageEdit />
+					</Route>
+				</Switch>
+			</div>
 		</div>
 	);
 }
