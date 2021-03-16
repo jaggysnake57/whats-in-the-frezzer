@@ -94,14 +94,17 @@ export const updateItem = (user, itemId, item) => async (dispatch) => {
 	}
 };
 
-// export const filterItems = (filters) => async (dispatch) => {
-
-// 	const filteredItems = state.items.filter((item) => {
-// 		if (filters.search && items.name.search(filters.search)) {
-// 			console.log('search found');
-// 		}
-// 	});
-// };
+export const updateQuant = (userId, itemId, newQuant) => async (dispatch) => {
+	try {
+		const res = await db
+			.collection('users')
+			.doc(userId)
+			.collection('items')
+			.doc(itemId)
+			.update({ quantity: newQuant });
+		dispatch(getAllUsersItems(userId));
+	} catch (err) {}
+};
 
 export const selectItems = (state) => state.items;
 export default itemsSlice.reducer;

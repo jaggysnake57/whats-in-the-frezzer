@@ -16,8 +16,15 @@
   display: flex;
   align-items: center;
 }
+.itemsList .itemAmount.locked svg {
+  color: darkgrey;
+  cursor: not-allowed;
+}
 .itemsList .itemAmount p {
   margin: 0 1.5rem;
+}
+.itemsList .itemAmount p img {
+  width: 20px;
 }
 .itemsList .itemAmount svg {
   font-size: 1.2rem;

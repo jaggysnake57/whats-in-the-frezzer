@@ -33,7 +33,7 @@ const FilterBar = ({ setZeroQuantValue }) => {
 			dispatch(setFiltered(false));
 			dispatch(setFilteredItems([]));
 		}
-	}, [searchValue]);
+	}, [searchValue, items]);
 
 	return (
 		<div className="toolbar">

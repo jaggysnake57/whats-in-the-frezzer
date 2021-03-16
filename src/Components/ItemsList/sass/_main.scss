@@ -18,8 +18,17 @@
 	.itemAmount {
 		display: flex;
 		align-items: center;
+		&.locked {
+			svg {
+				color: darkgrey;
+				cursor: not-allowed;
+			}
+		}
 		p {
 			margin: 0 1.5rem;
+			img {
+				width: 20px;
+			}
 		}
 		svg {
 			font-size: 1.2rem;
