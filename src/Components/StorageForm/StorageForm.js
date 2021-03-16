@@ -1,20 +1,26 @@
+//react
 import React, { useEffect, useState } from 'react';
+// redux
 import { useDispatch, useSelector } from 'react-redux';
+//slices
 import {
 	addNewStorage,
 	editStorage,
 } from '../../features/storages/storageSlice';
 import { selectUser } from '../../features/user/userSlice';
+//css
 import './index.css';
 
 const StorageForm = ({ editable, id, editableStorage }) => {
+	//hooks
 	const dispatch = useDispatch();
 	const { userDocId } = useSelector(selectUser);
-
+	//state
 	const [nameValue, setNameValue] = useState('');
 	const [shelfNumberValue, setShelfNumberValue] = useState('');
 	const [shelfNamesValue, setShelfNamesValue] = useState({});
 	const [shelfJSX, setShelfJSX] = useState('');
+	//functions
 
 	const showShelfNameForm = () => {
 		let shelfNameJSX = [];
@@ -63,6 +69,7 @@ const StorageForm = ({ editable, id, editableStorage }) => {
 			return false;
 		}
 	};
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const newStorageData = prepStorageForDB();
@@ -76,11 +83,14 @@ const StorageForm = ({ editable, id, editableStorage }) => {
 			console.log(false);
 		}
 	};
+	// useEffects
 
+	//shelf jsx effect
 	useEffect(() => {
 		setShelfJSX(showShelfNameForm());
 	}, [shelfNumberValue]);
 
+	// populate fields if the form is editable
 	useEffect(() => {
 		if (editable) {
 			const { name, shelfNum, shelves } = editableStorage;
@@ -114,7 +124,7 @@ const StorageForm = ({ editable, id, editableStorage }) => {
 						onChange={(e) => setShelfNumberValue(e.target.value)}
 						placeholder="enter number of shelves"
 					/>
-					<h3>Shelf Names</h3>
+					{shelfJSX.length ? <h3>Shelf Names</h3> : ''}
 					{shelfJSX}
 					<button className="btn btnPrimary">Submit</button>
 				</form>

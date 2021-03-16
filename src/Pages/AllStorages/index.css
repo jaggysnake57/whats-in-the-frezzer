@@ -1,3 +1,6 @@
+.allStorages h1 {
+  margin-bottom: 3rem;
+}
 .allStorages .row {
   display: grid;
   grid-template-columns: 3fr 3fr 2fr 1fr;

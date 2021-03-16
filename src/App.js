@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import {
 	BrowserRouter as Router,
+	Redirect,
 	Route,
 	Switch,
 	useHistory,
@@ -42,8 +43,6 @@ function App() {
 			dispatch(getAllUsersItems(userDocId));
 			dispatch(getAllUsersStorages(userDocId));
 			history.push('/');
-		} else {
-			history.push('/login');
 		}
 	}, [userDocId]);
 
@@ -55,7 +54,7 @@ function App() {
 				{error?.message}
 			</div>
 			<div className="container">
-				{/* {!username ? <Login /> : null} */}
+				{!username ? <Redirect to="/login" /> : null}
 				<Switch>
 					<Route exact path="/">
 						<Home />

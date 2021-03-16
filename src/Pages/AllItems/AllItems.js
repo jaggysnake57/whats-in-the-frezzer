@@ -4,7 +4,8 @@ import './index.css';
 
 const AllItems = () => {
 	return (
-		<div>
+		<div className="allItems">
+			<h1>All Your Items</h1>
 			<ItemsList />
 		</div>
 	);
