@@ -1,0 +1,71 @@
+@import '../../../vars';
+
+.userEdit {
+	form {
+		display: flex;
+		flex-direction: column;
+		width: 60%;
+		max-width: 1000px;
+		margin: 3rem auto;
+		input {
+			background-color: $mainBlue;
+			color: $white;
+			border: none;
+			border-radius: 5px;
+			font-size: 1.3rem;
+			padding: 0.5rem;
+		}
+		input[type='file'] {
+			display: none;
+		}
+		.btn {
+			width: 200px;
+			margin-left: auto;
+			font-size: 1.5rem;
+		}
+		.inputGroup {
+			display: grid;
+			grid-template-columns: 2fr 8fr;
+			align-items: center;
+			margin-bottom: 2rem;
+			label {
+				font-size: 1.2rem;
+			}
+		}
+		.avatarGroup {
+			position: relative;
+			width: 80%;
+			margin-left: auto;
+			margin-bottom: 2rem;
+			p {
+				display: block;
+				position: absolute;
+				background-color: rgba(0, 0, 0, 0.5);
+				color: white;
+				width: 100%;
+				padding: 1rem;
+				top: 0;
+				opacity: 0.2;
+				text-align: center;
+			}
+			h3 {
+				position: absolute;
+				bottom: 1px;
+				padding: 1rem;
+				background-color: $black;
+				color: white;
+				width: 100%;
+				text-align: center;
+				font-weight: 400;
+			}
+			img {
+				width: 100%;
+				cursor: pointer;
+				&:hover + p {
+					transition: opacity 0.3s;
+					opacity: 1;
+				}
+			}
+		}
+	}
+}

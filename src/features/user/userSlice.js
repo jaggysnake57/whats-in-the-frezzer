@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { db } from '../../firebase';
+import { db, storageRef } from '../../firebase';
 
 export const userSlice = createSlice({
 	name: 'user',
@@ -30,6 +30,7 @@ export const userSlice = createSlice({
 			state.name.last = lastName;
 			state.avatar = avatar;
 			state.userDocId = action.payload.userId;
+			state.email = email;
 		},
 	},
 });
@@ -57,6 +58,26 @@ export const getUser = () => async (dispatch) => {
 		}
 
 		// dispatch(setUser());
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+export const editUserData = (userId, userData, file) => async (dispatch) => {
+	try {
+		await db.collection('users').doc(userId).update(userData);
+		console.log('data updated');
+		if (file) {
+			const fileRef = storageRef.child(file.name);
+			await fileRef.put(file);
+			const fileUrl = await fileRef.getDownloadURL();
+			await db
+				.collection('users')
+				.doc(userId)
+				.update({ avatar: fileUrl });
+			console.log('file uploaded');
+		}
+		dispatch(getUser());
 	} catch (err) {
 		console.log(err);
 	}

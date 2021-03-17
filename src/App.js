@@ -26,6 +26,8 @@ import Navbar from './Components/Navbar/Navbar';
 import AllItems from './Pages/AllItems/AllItems';
 //css
 import './App.css';
+import User from './Pages/User/User';
+import UserEdit from './Pages/UserEdit/UserEdit';
 
 function App() {
 	const [items, setItems] = useState({});
@@ -61,6 +63,12 @@ function App() {
 					</Route>
 					<Route exact path="/login">
 						<Login />
+					</Route>
+					<Route exact path="/user">
+						<User />
+					</Route>
+					<Route exact path="/user/edit">
+						<UserEdit />
 					</Route>
 
 					<Route exact path="/items">

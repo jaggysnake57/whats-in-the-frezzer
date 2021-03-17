@@ -1,0 +1,20 @@
+.user {
+  display: flex;
+}
+.user .leftPane,
+.user .rightPane {
+  flex: 1;
+}
+.user .rightPane {
+  display: flex;
+  justify-content: end;
+}
+.user .leftPane h1 {
+  margin-bottom: 2rem;
+}
+.user .leftPane h2 {
+  margin-bottom: 2rem;
+}
+.user .leftPane p {
+  margin-bottom: 2rem;
+}
