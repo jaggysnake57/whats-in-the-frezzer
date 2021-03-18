@@ -28,6 +28,7 @@ import AllItems from './Pages/AllItems/AllItems';
 import './App.css';
 import User from './Pages/User/User';
 import UserEdit from './Pages/UserEdit/UserEdit';
+import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 
 function App() {
 	const [items, setItems] = useState({});
@@ -58,37 +59,41 @@ function App() {
 			<div className="container">
 				{!username ? <Redirect to="/login" /> : null}
 				<Switch>
-					<Route exact path="/">
-						<Home />
-					</Route>
-					<Route exact path="/login">
-						<Login />
-					</Route>
-					<Route exact path="/user">
-						<User />
-					</Route>
-					<Route exact path="/user/edit">
-						<UserEdit />
-					</Route>
+					<PrivateRoute exact path="/" component={Home} />
 
-					<Route exact path="/items">
-						<AllItems />
-					</Route>
-					<Route exact path="/items/new">
-						<NewItem />
-					</Route>
-					<Route path="/items/:id">
-						<ItemEdit />
-					</Route>
-					<Route exact path="/storages">
-						<AllStorages />
-					</Route>
-					<Route exact path="/storages/new">
-						<NewStorage />
-					</Route>
-					<Route exact path="/storages/:id">
-						<StorageEdit />
-					</Route>
+					<Route exact path="/login" component={Login} />
+
+					<PrivateRoute exact path="/user" component={User} />
+
+					<PrivateRoute
+						exact
+						path="/user/edit"
+						component={UserEdit}
+					/>
+
+					<PrivateRoute exact path="/items" component={AllItems} />
+
+					<PrivateRoute exact path="/items/new" component={NewItem} />
+
+					<PrivateRoute path="/items/:id" component={ItemEdit} />
+
+					<PrivateRoute
+						exact
+						path="/storages"
+						component={AllStorages}
+					/>
+
+					<PrivateRoute
+						exact
+						path="/storages/new"
+						component={NewStorage}
+					/>
+
+					<PrivateRoute
+						exact
+						path="/storages/:id"
+						component={StorageEdit}
+					/>
 				</Switch>
 			</div>
 		</div>
