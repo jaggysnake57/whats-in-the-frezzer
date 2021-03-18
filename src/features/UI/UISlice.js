@@ -33,5 +33,9 @@ export const {
 	unsetLoading,
 } = UISlice.actions;
 
+export const externalSetMessage = (message) => {
+	return setMessage(message);
+};
+
 export const selectUI = (state) => state.UI;
 export default UISlice.reducer;

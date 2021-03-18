@@ -1,5 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { db, storageRef } from '../../firebase';
+import { getAllUsersItems } from '../items/itemsSlice';
+import { getAllUsersStorages } from '../storages/storageSlice';
+import { externalSetMessage } from '../UI/UISlice';
 
 export const userSlice = createSlice({
 	name: 'user',
@@ -45,7 +48,13 @@ export const getUser = () => async (dispatch) => {
 			.where('UUID', '==', UUID)
 			.get();
 		if (data.empty) {
-			console.log('nothing found');
+			dispatch(
+				externalSetMessage({
+					type: 'error',
+					content:
+						'There has been and internal error. CODE: no user found',
+				})
+			);
 		} else {
 			data.docs.map((user) => {
 				dispatch(
@@ -54,19 +63,27 @@ export const getUser = () => async (dispatch) => {
 						userData: user.data(),
 					})
 				);
+
+				// dispatch(
+				// 	externalSetMessage({
+				// 		type: 'general',
+				// 		content: `welcome back ${user.data().username}`,
+				// 	})
+				// );
+				dispatch(getAllUsersItems(user.id));
+				dispatch(getAllUsersStorages(user.id));
 			});
 		}
 
 		// dispatch(setUser());
 	} catch (err) {
-		console.log(err);
+		dispatch(externalSetMessage({ type: 'error', content: err }));
 	}
 };
 
 export const editUserData = (userId, userData, file) => async (dispatch) => {
 	try {
 		await db.collection('users').doc(userId).update(userData);
-		console.log('data updated');
 		if (file) {
 			const fileRef = storageRef.child(file.name);
 			await fileRef.put(file);
@@ -75,11 +92,17 @@ export const editUserData = (userId, userData, file) => async (dispatch) => {
 				.collection('users')
 				.doc(userId)
 				.update({ avatar: fileUrl });
-			console.log('file uploaded');
 		}
 		dispatch(getUser());
+		dispatch(
+			externalSetMessage({
+				type: 'success',
+				content: 'User Profile updated',
+			})
+		);
 	} catch (err) {
 		console.log(err);
+		dispatch(externalSetMessage({ type: 'error', content: err }));
 	}
 };
 

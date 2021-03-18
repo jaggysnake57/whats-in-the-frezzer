@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { db } from '../../firebase';
+import { externalSetMessage } from '../UI/UISlice';
 
 export const storageSlice = createSlice({
 	name: 'storage',
@@ -31,7 +32,9 @@ export const getAllUsersStorages = (id) => async (dispatch) => {
 			.collection('location')
 			.get();
 		if (data.empty) {
-			console.log('nothing found');
+			dispatch(
+				externalSetMessage({ type: 'error', content: 'User not found' })
+			);
 		} else {
 			let tempStorage = [];
 			data.docs.map((storage) => {
@@ -43,7 +46,7 @@ export const getAllUsersStorages = (id) => async (dispatch) => {
 			dispatch(setStorages(tempStorage));
 		}
 	} catch (err) {
-		console.log(err);
+		dispatch(externalSetMessage({ type: 'error', content: err }));
 	}
 };
 
@@ -54,10 +57,16 @@ export const addNewStorage = (id, newStorage) => async (dispatch) => {
 			.doc(id)
 			.collection('location')
 			.add(newStorage);
-		dispatch(setMessage('new storage added'));
+
 		dispatch(getAllUsersStorages(id));
+		dispatch(
+			externalSetMessage({
+				type: 'success',
+				content: `New Storage, ${newStorage.name}, added`,
+			})
+		);
 	} catch (err) {
-		console.log(err);
+		dispatch(externalSetMessage({ type: 'error', content: err }));
 	}
 };
 
@@ -73,10 +82,15 @@ export const editStorage = (userID, storageID, editedStorage) => async (
 			.doc(storageID)
 			.set(editedStorage);
 		dispatch(getAllUsersStorages);
-
-		console.log(editedStorage.name, 'has been edited');
+		dispatch(
+			externalSetMessage({
+				type: 'success',
+				content: `${editedStorage.name} has been edited`,
+			})
+		);
 	} catch (err) {
 		console.log(err);
+		dispatch(externalSetMessage({ type: 'error', content: err }));
 	}
 };
 

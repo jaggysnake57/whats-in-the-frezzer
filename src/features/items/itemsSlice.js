@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { db } from '../../firebase';
+import { externalSetMessage } from '../UI/UISlice';
 
 export const itemsSlice = createSlice({
 	name: 'items',
 	initialState: {
 		items: [],
-		message: '',
-		error: {},
+
 		filteredItems: [],
 		filtered: false,
 	},
@@ -14,12 +14,7 @@ export const itemsSlice = createSlice({
 		setItems: (state, action) => {
 			state.items = action.payload;
 		},
-		setMessage: (state, action) => {
-			state.message = action.payload;
-		},
-		setError: (state, action) => {
-			state.error = action.payload;
-		},
+
 		setFilteredItems: (state, action) => {
 			state.filteredItems = action.payload;
 		},
@@ -29,13 +24,7 @@ export const itemsSlice = createSlice({
 	},
 });
 
-export const {
-	setItems,
-	setMessage,
-	setError,
-	setFilteredItems,
-	setFiltered,
-} = itemsSlice.actions;
+export const { setItems, setFilteredItems, setFiltered } = itemsSlice.actions;
 
 export const getAllUsersItems = (id) => async (dispatch) => {
 	try {
@@ -45,7 +34,9 @@ export const getAllUsersItems = (id) => async (dispatch) => {
 			.collection('items')
 			.get();
 		if (data.empty) {
-			console.log('nothing found');
+			dispatch(
+				externalSetMessage({ type: 'error', content: 'User not found' })
+			);
 		} else {
 			let tempItems = [];
 			data.docs.map((item) => {
@@ -57,7 +48,7 @@ export const getAllUsersItems = (id) => async (dispatch) => {
 			dispatch(setItems(tempItems));
 		}
 	} catch (err) {
-		console.log(err);
+		externalSetMessage({ type: 'error', content: err });
 	}
 };
 
@@ -71,11 +62,16 @@ export const addNewItem = (user, newItem) => async (dispatch) => {
 			.doc(user)
 			.collection('items')
 			.add(newItem);
-		dispatch(setMessage('New Item Added'));
+
 		dispatch(getAllUsersItems(user));
+		dispatch(
+			externalSetMessage({
+				type: 'success',
+				content: `New item, ${newItem.name}, has been added`,
+			})
+		);
 	} catch (err) {
-		console.log(err);
-		dispatch(setError(err));
+		externalSetMessage({ type: 'error', content: err });
 	}
 };
 
@@ -87,10 +83,22 @@ export const updateItem = (user, itemId, item) => async (dispatch) => {
 			.collection('items')
 			.doc(itemId)
 			.set(item);
-		dispatch(setMessage(`The item ${item.name} has been updated`));
+
 		dispatch(getAllUsersItems(user));
+		dispatch(
+			externalSetMessage({
+				type: 'success',
+				content: `${item.name} has been updated`,
+			})
+		);
 	} catch (err) {
-		dispatch(setError(err));
+		console.log(err);
+		dispatch(
+			externalSetMessage({
+				type: 'error',
+				content: err,
+			})
+		);
 	}
 };
 
@@ -102,8 +110,16 @@ export const updateQuant = (userId, itemId, newQuant) => async (dispatch) => {
 			.collection('items')
 			.doc(itemId)
 			.update({ quantity: newQuant });
+
 		dispatch(getAllUsersItems(userId));
-	} catch (err) {}
+	} catch (err) {
+		dispatch(
+			externalSetMessage({
+				type: 'error',
+				content: err,
+			})
+		);
+	}
 };
 
 export const selectItems = (state) => state.items;

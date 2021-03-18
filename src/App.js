@@ -43,69 +43,11 @@ function App() {
 		dispatch(clearMessage());
 	});
 
-	const handleTestFlash = (type) => {
-		switch (type) {
-			case 'error':
-				dispatch(
-					setMessage({
-						type: 'error',
-						content: 'this is a test error message',
-					})
-				);
-				break;
-			case 'success':
-				dispatch(
-					setMessage({
-						type: 'success',
-						content: 'this is a test success message',
-					})
-				);
-				break;
-			case 'general':
-				dispatch(
-					setMessage({
-						type: 'general',
-						content: 'this is a test general message',
-					})
-				);
-				break;
-
-			default:
-				dispatch(
-					setMessage({
-						type: 'error',
-						content: 'something actualy went wrong',
-					})
-				);
-				break;
-		}
-	};
-
-	useEffect(() => {
-		if (userDocId) {
-			dispatch(getAllUsersItems(userDocId));
-			dispatch(getAllUsersStorages(userDocId));
-			history.push('/');
-		}
-	}, [userDocId]);
-
 	return (
 		<div className="App">
 			<Navbar />
 			{message.type && <FlashMessage />}
 			<div className="container">
-				<div style={{ marginTop: '5rem' }}>
-					<button onClick={() => handleTestFlash('error')}>
-						warn
-					</button>
-					<button onClick={() => handleTestFlash('success')}>
-						success
-					</button>
-					<button onClick={() => handleTestFlash('general')}>
-						general
-					</button>
-				</div>
-				{!username ? <Redirect to="/login" /> : null}
 				<Switch>
 					<PrivateRoute exact path="/" component={Home} />
 

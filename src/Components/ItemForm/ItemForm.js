@@ -6,7 +6,6 @@ import {
 	addNewItem,
 	getAllUsersItems,
 	selectItems,
-	setError,
 	updateItem,
 } from '../../features/items/itemsSlice';
 import { selectUser } from '../../features/user/userSlice';
@@ -63,12 +62,7 @@ const ItemForm = ({ editable }) => {
 			} else if (!packSizeValue) {
 				setFormError('pack');
 			}
-			dispatch(
-				setError({
-					message:
-						'A required field is missing, please check the form',
-				})
-			);
+			console.log('a field is missing');
 		}
 	};
 

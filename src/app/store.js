@@ -7,9 +7,9 @@ import UIReducer from '../features/UI/UISlice';
 
 export default configureStore({
 	reducer: {
+		UI: UIReducer,
 		user: userReducer,
 		items: itemsReducer,
 		storage: storageReducer,
-		UI: UIReducer,
 	},
 });
