@@ -1,0 +1,35 @@
+@import '../../../vars';
+
+.flashMessage {
+	position: absolute;
+	width: 100%;
+	top: 41px;
+	padding: 1rem 0;
+	font-size: 1.5rem;
+	.container {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	svg {
+		font-size: 1.5rem;
+		cursor: pointer;
+	}
+	&.error {
+		background-color: $dangerRed;
+		color: $white;
+		button {
+			color: $white;
+		}
+	}
+	&.success {
+		background-color: $successGreen;
+	}
+	&.general {
+		background-color: $primaryBlue;
+		color: $white;
+		button {
+			color: $white;
+		}
+	}
+}

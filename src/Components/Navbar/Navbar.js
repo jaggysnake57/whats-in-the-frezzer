@@ -69,8 +69,14 @@ const Navbar = () => {
 					<div></div>
 				</div>
 				<div className="userMini">
-					<Link to="/user">Hello {username}</Link>
-					<img src={avatar} alt="" />
+					{username ? (
+						<>
+							<Link to="/user">Hello {username}</Link>
+							<img src={avatar} alt="avatar" />
+						</>
+					) : (
+						<Link to="/login">Log In</Link>
+					)}
 				</div>
 			</div>
 		</div>

@@ -1,0 +1,33 @@
+.flashMessage {
+  position: absolute;
+  width: 100%;
+  top: 41px;
+  padding: 1rem 0;
+  font-size: 1.5rem;
+}
+.flashMessage .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.flashMessage svg {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.flashMessage.error {
+  background-color: #d1345b;
+  color: #f4faff;
+}
+.flashMessage.error button {
+  color: #f4faff;
+}
+.flashMessage.success {
+  background-color: #02de99;
+}
+.flashMessage.general {
+  background-color: #315d8f;
+  color: #f4faff;
+}
+.flashMessage.general button {
+  color: #f4faff;
+}
