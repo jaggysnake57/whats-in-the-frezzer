@@ -1,6 +1,7 @@
 .itemsList .itemRow {
   display: grid;
-  grid-template-columns: 3fr 3fr 2fr 1fr 0.5fr;
+  grid-template-columns: 2.5fr 4fr 1.5fr 1fr 0.93fr;
+  gap: 0.5rem;
   align-items: center;
   background-color: #5394df;
   color: #f4faff;
@@ -11,6 +12,10 @@
 .itemsList .itemRow:nth-child(2n) {
   background-color: #f4faff;
   color: #08090a;
+}
+.itemsList .itemRow button {
+  font-size: 1.2rem;
+  padding: 5px;
 }
 .itemsList .itemAmount {
   display: flex;

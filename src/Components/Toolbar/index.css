@@ -50,3 +50,8 @@
 .toolbar input[type=checkbox]:checked + .checkLabel::after {
   display: block;
 }
+.toolbar button.btn {
+  width: 10%;
+  font-size: 1.2rem;
+  margin-right: 8px;
+}

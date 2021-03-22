@@ -21,6 +21,9 @@
 .btnWarning {
 	background-color: $warningYellow;
 }
+.btnDanger {
+	background-color: $dangerRed;
+}
 
 body {
 	@include backgroundSVG;

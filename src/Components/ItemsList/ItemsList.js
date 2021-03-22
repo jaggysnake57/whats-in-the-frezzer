@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectItems, updateQuant } from '../../features/items/itemsSlice';
+import {
+	deleteItem,
+	selectItems,
+	updateQuant,
+} from '../../features/items/itemsSlice';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import './index.css';
@@ -16,6 +20,7 @@ const ItemsList = () => {
 	const [itemsToDisplay, setItemsToDisplay] = useState([]);
 	const [quantChangeLocked, setQuantChangeLocked] = useState(false);
 	const [lockedId, setLockedId] = useState('');
+	const [showDelete, setShowDelete] = useState(false);
 
 	const handleQuantityChange = (method, currentQuant, itemId) => {
 		if (!quantChangeLocked) {
@@ -40,6 +45,10 @@ const ItemsList = () => {
 		}
 	};
 
+	const handleDelete = (itemId) => {
+		dispatch(deleteItem(userDocId, itemId));
+	};
+
 	useEffect(() => {
 		if (filtered) {
 			setItemsToDisplay(filteredItems);
@@ -49,16 +58,26 @@ const ItemsList = () => {
 		setQuantChangeLocked(false);
 		setLockedId('');
 	}, [items, filtered, filteredItems]);
+
 	return (
 		<div className="itemsList">
-			<ToolBar setZeroQuantValue={setZeroQuantValue} />
+			<ToolBar
+				setZeroQuantValue={setZeroQuantValue}
+				setShowDelete={setShowDelete}
+				showDelete={showDelete}
+			/>
 			<div className="allItems">
 				{itemsToDisplay.map((item) =>
 					item.quantity || zeroQuantValue ? (
 						<div className="itemRow" key={item.id}>
 							<p>{item.name}</p>
+
 							<p>
-								in {item.storedInName}, in draw {item.draw}
+								{item.storedInName
+									? `in ${item.storedInName}, in draw ${
+											item.draw ? item.draw : 'unknown'
+									  }`
+									: 'unknown'}
 							</p>
 							<p>
 								pack size -{' '}
@@ -97,11 +116,19 @@ const ItemsList = () => {
 									}
 								/>
 							</div>
-							<Link
-								className="btn btnPrimary"
-								to={`/items/${item.id}`}>
-								Edit
-							</Link>
+							{showDelete ? (
+								<button
+									className="btn btnDanger"
+									onClick={() => handleDelete(item.id)}>
+									Delete
+								</button>
+							) : (
+								<Link
+									className="btn btnPrimary"
+									to={`/items/${item.id}`}>
+									Edit
+								</Link>
+							)}
 						</div>
 					) : (
 						''

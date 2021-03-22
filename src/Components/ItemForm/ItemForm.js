@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 //redux
 import {
 	addNewItem,
+	deleteItem,
 	getAllUsersItems,
 	selectItems,
 	updateItem,
@@ -12,18 +13,22 @@ import { selectUser } from '../../features/user/userSlice';
 import { selectStorages } from '../../features/storages/storageSlice';
 //icons
 import { BiDownArrow } from 'react-icons/bi';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 //stylesheets
 import './index.css';
+import { selectUI } from '../../features/UI/UISlice';
+import Model from '../Model/Model';
 
 const ItemForm = ({ editable }) => {
 	//hooks
 	const dispatch = useDispatch();
 	const { id } = useParams();
+	const history = useHistory();
 	// slices
 	const { userDocId } = useSelector(selectUser);
 	const { items } = useSelector(selectItems);
 	const { storages } = useSelector(selectStorages);
+	const { message } = useSelector(selectUI);
 	//state
 	const [nameValue, setNameValue] = useState('');
 	const [packSizeValue, setPackSizeValue] = useState('');
@@ -33,6 +38,7 @@ const ItemForm = ({ editable }) => {
 	const [checkboxValue, setCheckboxValue] = useState(false);
 	const [formError, setFormError] = useState('');
 	const [currentShelves, setCurrentShelves] = useState([]);
+	const [popup, setPopup] = useState(false);
 	//functions
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -120,8 +126,15 @@ const ItemForm = ({ editable }) => {
 		//if so find storage and get shelves add to state
 	}, [storedInValue]);
 
+	useEffect(() => {
+		if (message.type === 'success' && message.content === 'Item Removed') {
+			history.push('/items');
+		}
+	}, [message]);
+
 	return (
 		<div className="itemForm">
+			{popup && <Model setPopup={setPopup} id={id} deleteType={'item'} />}
 			<div className="formContainer">
 				<form action="" onSubmit={(e) => handleSubmit(e)}>
 					<input
@@ -199,6 +212,11 @@ const ItemForm = ({ editable }) => {
 						</select>
 					</div>
 					<div className="buttons">
+						<button
+							className="btn btnDanger"
+							onClick={() => setPopup(true)}>
+							Delete
+						</button>
 						<button
 							onClick={(e) => handleReset(e)}
 							className="btn btnWarning">

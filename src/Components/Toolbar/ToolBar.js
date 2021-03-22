@@ -7,7 +7,7 @@ import {
 } from '../../features/items/itemsSlice';
 import './index.css';
 
-const FilterBar = ({ setZeroQuantValue }) => {
+const FilterBar = ({ setZeroQuantValue, setShowDelete, showDelete }) => {
 	const dispatch = useDispatch();
 	const { items, filtered } = useSelector(selectItems);
 
@@ -29,7 +29,6 @@ const FilterBar = ({ setZeroQuantValue }) => {
 			});
 			dispatch(setFilteredItems(newFilteredItems));
 		} else {
-			console.log('clear filter');
 			dispatch(setFiltered(false));
 			dispatch(setFilteredItems([]));
 		}
@@ -59,7 +58,7 @@ const FilterBar = ({ setZeroQuantValue }) => {
 						Show 0 Quantity Items
 					</label>
 				</div>
-				<p>Filters</p>
+				{/* <p>Filters</p>
 				<select name="" id="">
 					<option value="" disabled selected>
 						Location
@@ -73,8 +72,13 @@ const FilterBar = ({ setZeroQuantValue }) => {
 					<option value="">Main</option>
 					<option value="">Side</option>
 					<option value="">desert</option>
-				</select>
+				</select> */}
 			</div>
+			<button
+				className={`btn ${showDelete ? 'btnPrimary' : 'btnDanger'}`}
+				onClick={() => setShowDelete(!showDelete)}>
+				{showDelete ? 'Edit' : 'Delete'}
+			</button>
 		</div>
 	);
 };

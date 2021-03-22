@@ -2,12 +2,15 @@
 import React, { useEffect, useState } from 'react';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 //slices
 import {
 	addNewStorage,
 	editStorage,
 } from '../../features/storages/storageSlice';
+import { selectUI } from '../../features/UI/UISlice';
 import { selectUser } from '../../features/user/userSlice';
+import Model from '../Model/Model';
 //css
 import './index.css';
 
@@ -15,11 +18,14 @@ const StorageForm = ({ editable, id, editableStorage }) => {
 	//hooks
 	const dispatch = useDispatch();
 	const { userDocId } = useSelector(selectUser);
+	const { message } = useSelector(selectUI);
+	const history = useHistory();
 	//state
 	const [nameValue, setNameValue] = useState('');
 	const [shelfNumberValue, setShelfNumberValue] = useState('');
 	const [shelfNamesValue, setShelfNamesValue] = useState({});
 	const [shelfJSX, setShelfJSX] = useState('');
+	const [popup, setPopup] = useState(false);
 	//functions
 
 	const showShelfNameForm = () => {
@@ -115,26 +121,23 @@ const StorageForm = ({ editable, id, editableStorage }) => {
 		setShelfJSX(showShelfNameForm());
 	}, [shelfNumberValue]);
 
-	// populate fields if the form is editable
 	useEffect(() => {
 		if (editable) {
-			// const { name, shelfNum, shelves } = editableStorage;
-			// setNameValue(name);
-			// setShelfNumberValue(shelfNum);
-			// shelves?.map((shelfName, i) => {
-			// 	setShelfNamesValue((prevValues) => {
-			// 		return {
-			// 			...prevValues,
-			// 			[i + 1]: shelfName,
-			// 		};
-			// 	});
-			// });
 			populateEditableFields();
 		}
 	}, [editableStorage]);
 
+	useEffect(() => {
+		if (message.type === 'success' && message.content === 'Item Removed') {
+			history.push('/storages');
+		}
+	}, [message]);
+
 	return (
 		<div className="storageForm">
+			{popup && (
+				<Model setPopup={setPopup} id={id} deleteType={'storage'} />
+			)}
 			<div className="storageFormContainer">
 				<form onSubmit={(e) => handleSubmit(e)}>
 					<input
@@ -153,6 +156,12 @@ const StorageForm = ({ editable, id, editableStorage }) => {
 					{shelfJSX.length ? <h3>Shelf Names</h3> : ''}
 					{shelfJSX}
 					<div className="buttons">
+						<button
+							className="btn btnDanger"
+							type="button"
+							onClick={() => setPopup(true)}>
+							Delete
+						</button>
 						<button
 							onClick={(e) => handleReset(e)}
 							className="btn btnWarning">

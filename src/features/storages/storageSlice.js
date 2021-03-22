@@ -94,5 +94,21 @@ export const editStorage = (userID, storageID, editedStorage) => async (
 	}
 };
 
+export const deleteStorage = (userId, storageId) => async (dispatch) => {
+	try {
+		db.collection('users')
+			.doc(userId)
+			.collection('location')
+			.doc(storageId)
+			.delete();
+		dispatch(
+			externalSetMessage({ type: 'success', content: 'Item Removed' })
+		);
+		dispatch(getAllUsersStorages(userId));
+	} catch (err) {
+		console.log(err);
+	}
+};
+
 export const selectStorages = (state) => state.storage;
 export default storageSlice.reducer;

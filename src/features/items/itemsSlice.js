@@ -122,5 +122,21 @@ export const updateQuant = (userId, itemId, newQuant) => async (dispatch) => {
 	}
 };
 
+export const deleteItem = (userId, itemId) => async (dispatch) => {
+	try {
+		db.collection('users')
+			.doc(userId)
+			.collection('items')
+			.doc(itemId)
+			.delete();
+		dispatch(
+			externalSetMessage({ type: 'success', content: 'Item Removed' })
+		);
+		dispatch(getAllUsersItems(userId));
+	} catch (err) {
+		console.log(err);
+	}
+};
+
 export const selectItems = (state) => state.items;
 export default itemsSlice.reducer;
