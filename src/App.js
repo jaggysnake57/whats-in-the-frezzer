@@ -52,10 +52,6 @@ function App() {
 	// 	dispatch(clearMessage());
 	// });
 
-	const dirtySignout = () => {
-		auth.signOut();
-	};
-
 	useEffect(() => {
 		auth.onAuthStateChanged((user) => {
 			if (user) {
@@ -71,7 +67,7 @@ function App() {
 	return (
 		<div className="App">
 			<Navbar />
-			<button onClick={() => dirtySignout()}>signout</button>
+
 			{message.type && <FlashMessage />}
 			<div className="container">
 				<Switch>

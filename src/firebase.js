@@ -2,13 +2,13 @@ import firebase from 'firebase';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-	apiKey: 'AIzaSyCmfVIvylTbURMJWUBkO4PEbFgCx_KwrPo',
-	authDomain: 'whats-in-the-fridge-f9f5b.firebaseapp.com',
-	projectId: 'whats-in-the-fridge-f9f5b',
-	storageBucket: 'whats-in-the-fridge-f9f5b.appspot.com',
-	messagingSenderId: '25787309746',
-	appId: '1:25787309746:web:8a6008902ade9472cdb3ab',
-	measurementId: 'G-EH6PYP27F5',
+	apiKey: process.env.REACT_APP_API_KEY,
+	authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+	projectId: process.env.REACT_APP_PROJECT_ID,
+	storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+	messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+	appId: process.env.REACT_APP_APP_ID,
+	measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
