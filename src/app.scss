@@ -28,3 +28,27 @@
 body {
 	@include backgroundSVG;
 }
+
+.signUp,
+.login {
+	display: grid;
+	place-items: center;
+	padding-top: 10rem;
+	.signUpFormBox,
+	.loginFormBox {
+		background-color: $mainBlue;
+		padding: 3rem 5rem;
+		text-align: center;
+		color: $white;
+		h1 {
+			margin-bottom: 3rem;
+		}
+		button {
+			width: 200px;
+			font-size: 1.2rem;
+			margin-left: auto;
+			display: block;
+			margin-top: 3rem;
+		}
+	}
+}

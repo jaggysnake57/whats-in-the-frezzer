@@ -32,3 +32,35 @@ body {
   background-attachment: fixed;
   background-size: cover;
 }
+
+.signUp,
+.login {
+  display: grid;
+  place-items: center;
+  padding-top: 10rem;
+}
+.signUp .signUpFormBox,
+.signUp .loginFormBox,
+.login .signUpFormBox,
+.login .loginFormBox {
+  background-color: #5394df;
+  padding: 3rem 5rem;
+  text-align: center;
+  color: #f4faff;
+}
+.signUp .signUpFormBox h1,
+.signUp .loginFormBox h1,
+.login .signUpFormBox h1,
+.login .loginFormBox h1 {
+  margin-bottom: 3rem;
+}
+.signUp .signUpFormBox button,
+.signUp .loginFormBox button,
+.login .signUpFormBox button,
+.login .loginFormBox button {
+  width: 200px;
+  font-size: 1.2rem;
+  margin-left: auto;
+  display: block;
+  margin-top: 3rem;
+}

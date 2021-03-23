@@ -1,0 +1,44 @@
+.signUp {
+  display: grid;
+  place-items: center;
+  padding-top: 10rem;
+}
+.signUp .signUpFormBox {
+  background-color: #5394df;
+  padding: 3rem 5rem;
+  text-align: center;
+  color: #f4faff;
+}
+.signUp .signUpFormBox h1 {
+  margin-bottom: 3rem;
+}
+.signUp .signUpFormBox button {
+  width: 200px;
+  font-size: 1.2rem;
+  margin-left: auto;
+  display: block;
+  margin-top: 3rem;
+}
+
+.inputGroup {
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.inputGroup label {
+  margin-right: 2rem;
+}
+.inputGroup input {
+  background: none;
+  border: none;
+  color: #08090a;
+  background-color: #f4faff;
+  color: #08090a;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.3rem;
+  padding: 0.5rem;
+  width: 400px;
+}

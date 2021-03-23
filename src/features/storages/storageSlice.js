@@ -6,23 +6,18 @@ export const storageSlice = createSlice({
 	name: 'storage',
 	initialState: {
 		storages: [],
-		message: '',
-		error: {},
 	},
 	reducers: {
 		setStorages: (state, action) => {
 			state.storages = action.payload;
 		},
-		setMessage: (state, action) => {
-			state.message = action.payload;
-		},
-		setError: (state, action) => {
-			state.error = action.payload;
+		clearStorage: (state) => {
+			state.storages = [];
 		},
 	},
 });
 
-export const { setStorages, setMessage, setError } = storageSlice.actions;
+export const { setStorages, clearStorage } = storageSlice.actions;
 
 export const getAllUsersStorages = (id) => async (dispatch) => {
 	try {

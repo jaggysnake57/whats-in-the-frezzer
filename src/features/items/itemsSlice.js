@@ -6,7 +6,6 @@ export const itemsSlice = createSlice({
 	name: 'items',
 	initialState: {
 		items: [],
-
 		filteredItems: [],
 		filtered: false,
 	},
@@ -21,10 +20,20 @@ export const itemsSlice = createSlice({
 		setFiltered: (state, action) => {
 			state.filtered = action.payload;
 		},
+		clearItems: (state) => {
+			state.items = [];
+			state.filteredItems = [];
+			state.filtered = false;
+		},
 	},
 });
 
-export const { setItems, setFilteredItems, setFiltered } = itemsSlice.actions;
+export const {
+	setItems,
+	setFilteredItems,
+	setFiltered,
+	clearItems,
+} = itemsSlice.actions;
 
 export const getAllUsersItems = (id) => async (dispatch) => {
 	try {

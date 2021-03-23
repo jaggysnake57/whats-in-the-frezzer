@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { db, storageRef } from '../../firebase';
+
+import { auth, db, storageRef } from '../../firebase';
 import { getAllUsersItems } from '../items/itemsSlice';
 import { getAllUsersStorages } from '../storages/storageSlice';
 import { externalSetMessage } from '../UI/UISlice';
@@ -35,14 +36,42 @@ export const userSlice = createSlice({
 			state.userDocId = action.payload.userId;
 			state.email = email;
 		},
+		clearUser: (state) => {
+			state.UUID = '';
+			state.username = '';
+			state.name.first = '';
+			state.name.last = '';
+			state.avatar = '';
+			state.userDocId = '';
+			state.email = '';
+		},
 	},
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUser, clearUser } = userSlice.actions;
 
-export const getUser = () => async (dispatch) => {
+export const createNewUser = (userData) => async (dispatch) => {
 	try {
-		const UUID = 'u0tHuGAnx8b2JDshY5Kb37FwsMA2';
+		const newUser = await auth.createUserWithEmailAndPassword(
+			userData.email,
+			userData.password
+		);
+	} catch (err) {
+		console.log(err);
+		dispatch(externalSetMessage({ type: 'error', content: err.message }));
+	}
+};
+
+export const loginUser = (email, password) => async (dispatch) => {
+	try {
+		const user = await auth.signInWithEmailAndPassword(email, password);
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+export const getUser = (UUID) => async (dispatch) => {
+	try {
 		const data = await db
 			.collection('users')
 			.where('UUID', '==', UUID)
@@ -64,12 +93,6 @@ export const getUser = () => async (dispatch) => {
 					})
 				);
 
-				// dispatch(
-				// 	externalSetMessage({
-				// 		type: 'general',
-				// 		content: `welcome back ${user.data().username}`,
-				// 	})
-				// );
 				dispatch(getAllUsersItems(user.id));
 				dispatch(getAllUsersStorages(user.id));
 			});

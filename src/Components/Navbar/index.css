@@ -24,6 +24,8 @@
 }
 .navbar .dropdown {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 .navbar .dropdown p {
   cursor: pointer;
@@ -47,6 +49,9 @@
 .navbar .userMini {
   display: flex;
   align-items: center;
+}
+.navbar .userMini a {
+  margin-left: 1rem;
 }
 .navbar .userMini img {
   width: 30px;

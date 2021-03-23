@@ -135,97 +135,110 @@ const ItemForm = ({ editable }) => {
 	return (
 		<div className="itemForm">
 			{popup && <Model setPopup={setPopup} id={id} deleteType={'item'} />}
-			<div className="formContainer">
-				<form action="" onSubmit={(e) => handleSubmit(e)}>
-					<input
-						type="text"
-						placeholder="Item Name"
-						value={nameValue}
-						onChange={(e) => setNameValue(e.target.value)}
-						className={formError === 'name' ? 'formError' : null}
-					/>
-					<div className="formRow">
+			{editable && nameValue ? (
+				<div className="formContainer">
+					<form action="" onSubmit={(e) => handleSubmit(e)}>
 						<input
-							type="number"
-							placeholder="Pack size"
-							value={packSizeValue}
-							onChange={(e) => setPackSizeValue(e.target.value)}
+							type="text"
+							placeholder="Item Name"
+							value={nameValue}
+							onChange={(e) => setNameValue(e.target.value)}
 							className={
-								formError === 'pack' ? 'formError' : null
+								formError === 'name' ? 'formError' : null
 							}
 						/>
-						<div className="toggleSwitch">
-							<p>Amount</p>
-							<label class="switch">
-								<input
-									type="checkbox"
-									onChange={(e) =>
-										setCheckboxValue(e.target.checked)
-									}
-									checked={checkboxValue}
-								/>
-								<span class="slider round"></span>
-							</label>
-							<p>Weight</p>
+						<div className="formRow">
+							<input
+								type="number"
+								placeholder="Pack size"
+								value={packSizeValue}
+								onChange={(e) =>
+									setPackSizeValue(e.target.value)
+								}
+								className={
+									formError === 'pack' ? 'formError' : null
+								}
+							/>
+							<div className="toggleSwitch">
+								<p>Amount</p>
+								<label class="switch">
+									<input
+										type="checkbox"
+										onChange={(e) =>
+											setCheckboxValue(e.target.checked)
+										}
+										checked={checkboxValue}
+									/>
+									<span class="slider round"></span>
+								</label>
+								<p>Weight</p>
+							</div>
 						</div>
-					</div>
-					<input
-						type="number"
-						placeholder="Quantity"
-						value={quantityValue}
-						onChange={(e) => setQuantityValue(e.target.value)}
-					/>
-					<div className="selectWrapper">
-						<BiDownArrow />
-						<select
-							onChange={(e) => setStoredInValue(e.target.value)}>
-							<option value="" disabled selected>
-								Stored in
-							</option>
-							{storages?.map((s) => (
-								<option
-									value={s.name}
-									selected={
-										storedInValue === s.name ? true : false
-									}>
-									{s.name}
+						<input
+							type="number"
+							placeholder="Quantity"
+							value={quantityValue}
+							onChange={(e) => setQuantityValue(e.target.value)}
+						/>
+						<div className="selectWrapper">
+							<BiDownArrow />
+							<select
+								onChange={(e) =>
+									setStoredInValue(e.target.value)
+								}>
+								<option value="" disabled selected>
+									Stored in
 								</option>
-							))}
-						</select>
-					</div>
-					<div className="selectWrapper">
-						<BiDownArrow />
-						<select onChange={(e) => setDrawValue(e.target.value)}>
-							<option value="" disabled selected>
-								Draw/shelf
-							</option>
-							{currentShelves.map((shelf, i) => (
-								<option
-									value={shelf ? shelf : i + 1}
-									selected={
-										drawValue === shelf ? true : false
-									}>
-									{shelf ? shelf : `shelf ${i + 1}`}
+								{storages?.map((s) => (
+									<option
+										value={s.name}
+										selected={
+											storedInValue === s.name
+												? true
+												: false
+										}>
+										{s.name}
+									</option>
+								))}
+							</select>
+						</div>
+						<div className="selectWrapper">
+							<BiDownArrow />
+							<select
+								onChange={(e) => setDrawValue(e.target.value)}>
+								<option value="" disabled selected>
+									Draw/shelf
 								</option>
-							))}
-							<option value="">none</option>
-						</select>
-					</div>
-					<div className="buttons">
-						<button
-							className="btn btnDanger"
-							onClick={() => setPopup(true)}>
-							Delete
-						</button>
-						<button
-							onClick={(e) => handleReset(e)}
-							className="btn btnWarning">
-							reset
-						</button>
-						<button className="btn btnPrimary">Submit</button>
-					</div>
-				</form>
-			</div>
+								{currentShelves.map((shelf, i) => (
+									<option
+										value={shelf ? shelf : i + 1}
+										selected={
+											drawValue === shelf ? true : false
+										}>
+										{shelf ? shelf : `shelf ${i + 1}`}
+									</option>
+								))}
+								<option value="">none</option>
+							</select>
+						</div>
+						<div className="buttons">
+							<button
+								className="btn btnDanger"
+								onClick={() => setPopup(true)}>
+								Delete
+							</button>
+							<button
+								onClick={(e) => handleReset(e)}
+								className="btn btnWarning">
+								reset
+							</button>
+							<button className="btn btnPrimary">Submit</button>
+						</div>
+					</form>
+				</div>
+			) : (
+				<h2>nothing found</h2>
+			)}
 		</div>
 	);
 };

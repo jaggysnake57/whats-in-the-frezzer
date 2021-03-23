@@ -10,9 +10,16 @@ import {
 //redux
 import { useDispatch, useSelector } from 'react-redux';
 //slices
-import { getUser, selectUser } from './features/user/userSlice';
-import { getAllUsersItems, selectItems } from './features/items/itemsSlice';
-import { getAllUsersStorages } from './features/storages/storageSlice';
+import { clearUser, getUser, selectUser } from './features/user/userSlice';
+import {
+	clearItems,
+	getAllUsersItems,
+	selectItems,
+} from './features/items/itemsSlice';
+import {
+	clearStorage,
+	getAllUsersStorages,
+} from './features/storages/storageSlice';
 //pages
 import NewItem from './Pages/NewItem/NewItem';
 import ItemEdit from './Pages/ItemEdit/ItemEdit';
@@ -31,27 +38,47 @@ import UserEdit from './Pages/UserEdit/UserEdit';
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 import FlashMessage from './Components/FlashMessage/FlashMessage';
 import { clearMessage, selectUI, setMessage } from './features/UI/UISlice';
+import SignUp from './Pages/SignUp/SignUp';
+import { auth } from './firebase';
 
 function App() {
 	const [items, setItems] = useState({});
 	const dispatch = useDispatch();
 	const { username, userDocId } = useSelector(selectUser);
 	const { message } = useSelector(selectUI);
-	const history = useHistory();
+	let history = useHistory();
 
-	history.listen((location, action) => {
-		dispatch(clearMessage());
-	});
+	// history.listen((location, action) => {
+	// 	dispatch(clearMessage());
+	// });
 
+	const dirtySignout = () => {
+		auth.signOut();
+	};
+
+	useEffect(() => {
+		auth.onAuthStateChanged((user) => {
+			if (user) {
+				dispatch(getUser(user.uid));
+			} else {
+				dispatch(clearUser());
+				dispatch(clearItems());
+				dispatch(clearStorage());
+				dispatch(clearMessage());
+			}
+		});
+	}, []);
 	return (
 		<div className="App">
 			<Navbar />
+			<button onClick={() => dirtySignout()}>signout</button>
 			{message.type && <FlashMessage />}
 			<div className="container">
 				<Switch>
 					<PrivateRoute exact path="/" component={Home} />
 
 					<Route exact path="/login" component={Login} />
+					<Route exact path="/signUp" component={SignUp} />
 
 					<PrivateRoute exact path="/user" component={User} />
 
