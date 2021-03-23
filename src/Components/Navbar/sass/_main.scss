@@ -1,9 +1,14 @@
 @import '../../../vars';
 
 .navbar {
+	position: relative;
 	background-color: $mainBlue;
 	color: $white;
 	margin-bottom: 5rem;
+	padding: 0.7rem 0;
+	h1 {
+		font-size: 1.5rem;
+	}
 	a {
 		color: $white;
 		text-decoration: none;
@@ -11,48 +16,57 @@
 	.container {
 		display: flex;
 		align-items: center;
-		justify-content: flex-end;
-		h1 {
-			margin-right: auto;
-		}
+		justify-content: space-between;
 	}
 	nav {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		margin-right: 10%;
+
 		width: 30%;
 	}
 	.dropdown {
 		position: relative;
 		display: flex;
 		align-items: center;
-
 		p {
 			cursor: pointer;
 		}
-		.dropdownLinks {
-			position: absolute;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			padding: 1rem;
-			background-color: $mainBlue;
-			min-width: 200px;
-			left: 50%;
-			margin-left: -100px;
-			top: -400%;
-			z-index: 5;
-		}
-		.open {
-			top: 170%;
+	}
+	.dropdownLinks {
+		position: absolute;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+		padding: 1rem;
+		background-color: $mainBlue;
+		min-width: 200px;
+		left: 50%;
+		margin-left: -100px;
+		top: -480%;
+		z-index: 5;
+		height: 90px;
+	}
+	.open {
+		top: 155%;
+	}
+	.burger {
+		display: none;
+		height: 15px;
+		flex-direction: column;
+		justify-content: space-between;
+		div {
+			width: 20px;
+			height: 2px;
+			background-color: $white;
 		}
 	}
 	.userMini {
 		display: flex;
 		align-items: center;
 		a {
-			margin-left: 1rem;
+			// margin-left: 1rem;
 		}
 		img {
 			width: 30px;

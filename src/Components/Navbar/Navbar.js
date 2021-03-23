@@ -10,12 +10,14 @@ const Navbar = () => {
 	const [itemsDropdownOpen, setItemsDropdownOpen] = useState(false);
 	const [storagesDropdownOpen, setStoragesDropdownOpen] = useState(false);
 	const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+	const [navMenuOpen, setNavMenuOpen] = useState(false);
 	const history = useHistory();
 
 	history.listen((location, action) => {
 		setStoragesDropdownOpen(false);
 		setItemsDropdownOpen(false);
 		setProfileDropdownOpen(false);
+		setNavMenuOpen(false);
 	});
 
 	const handleDropdownToggles = (dropdown) => {
@@ -40,11 +42,18 @@ const Navbar = () => {
 		}
 	};
 
+	const handleNavMenu = () => {
+		setStoragesDropdownOpen(false);
+		setItemsDropdownOpen(false);
+		setProfileDropdownOpen(false);
+		setNavMenuOpen(!navMenuOpen);
+	};
+
 	return (
 		<div className="navbar">
 			<div className="container">
 				<h1>Whats in the Freezer</h1>
-				<nav>
+				<nav className={`navMenu ${navMenuOpen ? 'navOpen' : null}`}>
 					<Link to="/">Home</Link>
 
 					<div className="dropdown">
@@ -52,7 +61,7 @@ const Navbar = () => {
 							Items
 						</p>
 						<div
-							className={`dropdownLinks ${
+							className={`dropdownLinks itemsDropdownLinks ${
 								itemsDropdownOpen ? 'open' : ''
 							}`}>
 							<Link to="/items">View All Items</Link>
@@ -64,7 +73,7 @@ const Navbar = () => {
 							Storages
 						</p>
 						<div
-							className={`dropdownLinks ${
+							className={`dropdownLinks storagesDropdownLinks ${
 								storagesDropdownOpen ? 'open' : ''
 							}`}>
 							<Link to="/storages">View All Storages</Link>
@@ -72,7 +81,7 @@ const Navbar = () => {
 						</div>
 					</div>
 				</nav>
-				<div className="burger">
+				<div className="burger" onClick={() => handleNavMenu()}>
 					<div></div>
 					<div></div>
 					<div></div>
@@ -80,10 +89,18 @@ const Navbar = () => {
 				<div className="userMini">
 					{username ? (
 						<div className="dropdown">
-							<p onClick={() => handleDropdownToggles('profile')}>
+							<p
+								className="userHandle"
+								onClick={() =>
+									handleDropdownToggles('profile')
+								}>
 								Hello {username}
 							</p>
-							<img src={avatar} alt="avatar" />
+							<img
+								src={avatar}
+								alt="avatar"
+								onClick={() => handleDropdownToggles('profile')}
+							/>
 							<div
 								className={`dropdownLinks ${
 									profileDropdownOpen ? 'open' : ''

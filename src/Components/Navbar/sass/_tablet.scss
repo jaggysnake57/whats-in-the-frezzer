@@ -1,1 +1,14 @@
 @import '../../../vars';
+
+@media (max-width: 1040px) {
+	.navbar {
+		nav {
+			width: 40%;
+		}
+		.userMini {
+			.userHandle {
+				display: none;
+			}
+		}
+	}
+}
