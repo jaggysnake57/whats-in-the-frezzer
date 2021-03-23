@@ -2,17 +2,20 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { selectUser } from '../../features/user/userSlice';
+import { auth } from '../../firebase';
 import './index.css';
 
 const Navbar = () => {
 	const { username, avatar } = useSelector(selectUser);
 	const [itemsDropdownOpen, setItemsDropdownOpen] = useState(false);
 	const [storagesDropdownOpen, setStoragesDropdownOpen] = useState(false);
+	const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
 	const history = useHistory();
 
 	history.listen((location, action) => {
 		setStoragesDropdownOpen(false);
 		setItemsDropdownOpen(false);
+		setProfileDropdownOpen(false);
 	});
 
 	const handleDropdownToggles = (dropdown) => {
@@ -20,11 +23,17 @@ const Navbar = () => {
 			case 'items':
 				setItemsDropdownOpen(!itemsDropdownOpen);
 				setStoragesDropdownOpen(false);
+				setProfileDropdownOpen(false);
 				break;
 			case 'storages':
 				setStoragesDropdownOpen(!storagesDropdownOpen);
 				setItemsDropdownOpen(false);
+				setProfileDropdownOpen(false);
 				break;
+			case 'profile':
+				setProfileDropdownOpen(!profileDropdownOpen);
+				setStoragesDropdownOpen(false);
+				setItemsDropdownOpen(false);
 
 			default:
 				break;
@@ -70,12 +79,24 @@ const Navbar = () => {
 				</div>
 				<div className="userMini">
 					{username ? (
-						<>
-							<Link to="/user">Hello {username}</Link>
+						<div className="dropdown">
+							<p onClick={() => handleDropdownToggles('profile')}>
+								Hello {username}
+							</p>
 							<img src={avatar} alt="avatar" />
-						</>
+							<div
+								className={`dropdownLinks ${
+									profileDropdownOpen ? 'open' : ''
+								}`}>
+								<Link to="/user">View Profile</Link>
+								<p onClick={() => auth.signOut()}>Logout</p>
+							</div>
+						</div>
 					) : (
-						<Link to="/login">Log In</Link>
+						<>
+							<Link to="/login">Log In</Link>
+							<Link to="/signup">Sign Up</Link>
+						</>
 					)}
 				</div>
 			</div>

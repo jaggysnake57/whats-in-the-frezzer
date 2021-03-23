@@ -25,6 +25,8 @@
 	}
 	.dropdown {
 		position: relative;
+		display: flex;
+		align-items: center;
 
 		p {
 			cursor: pointer;
@@ -49,6 +51,9 @@
 	.userMini {
 		display: flex;
 		align-items: center;
+		a {
+			margin-left: 1rem;
+		}
 		img {
 			width: 30px;
 			margin-left: 1rem;
