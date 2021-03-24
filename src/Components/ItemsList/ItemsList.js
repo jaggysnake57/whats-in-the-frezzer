@@ -5,7 +5,7 @@ import {
 	selectItems,
 	updateQuant,
 } from '../../features/items/itemsSlice';
-import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
+import { AiOutlinePlus, AiOutlineMinus, AiOutlineClose } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import './index.css';
 import ToolBar from '../Toolbar/ToolBar';
@@ -21,6 +21,7 @@ const ItemsList = () => {
 	const [quantChangeLocked, setQuantChangeLocked] = useState(false);
 	const [lockedId, setLockedId] = useState('');
 	const [showDelete, setShowDelete] = useState(false);
+	const [currentOpenInfoWrapper, setCurrentOpenInfoWrapper] = useState('');
 
 	const handleQuantityChange = (method, currentQuant, itemId) => {
 		if (!quantChangeLocked) {
@@ -49,6 +50,23 @@ const ItemsList = () => {
 		dispatch(deleteItem(userDocId, itemId));
 	};
 
+	const handleInfoDropdown = (target) => {
+		if (currentOpenInfoWrapper) {
+			currentOpenInfoWrapper.classList.remove('infoOpen');
+			currentOpenInfoWrapper.parentElement.classList.remove('rowExtend');
+		}
+		setCurrentOpenInfoWrapper(target.nextSibling);
+		target.nextSibling.classList.add('infoOpen');
+		target.parentElement.classList.add('rowExtend');
+	};
+
+	const closeInfoPanel = () => {
+		currentOpenInfoWrapper.classList.remove('infoOpen');
+		currentOpenInfoWrapper.parentElement.classList.remove('rowExtend');
+
+		setCurrentOpenInfoWrapper('');
+	};
+
 	useEffect(() => {
 		if (filtered) {
 			setItemsToDisplay(filteredItems);
@@ -70,21 +88,34 @@ const ItemsList = () => {
 				{itemsToDisplay.map((item) =>
 					item.quantity || zeroQuantValue ? (
 						<div className="itemRow" key={item.id}>
-							<p>{item.name}</p>
+							<p className="itemName">{item.name}</p>
+							<p
+								className="infoButton"
+								onClick={(e) => handleInfoDropdown(e.target)}>
+								i
+							</p>
+							<div className="itemInfoWrapper">
+								<p>
+									{item.storedInName
+										? `in ${item.storedInName}, in draw ${
+												item.draw
+													? item.draw
+													: 'unknown'
+										  }`
+										: 'unknown'}
+								</p>
+								<p>
+									pack size -{' '}
+									{item.packSizeWGT == 0
+										? item.packSizeAMT
+										: `${item.packSizeWGT}g`}
+								</p>
 
-							<p>
-								{item.storedInName
-									? `in ${item.storedInName}, in draw ${
-											item.draw ? item.draw : 'unknown'
-									  }`
-									: 'unknown'}
-							</p>
-							<p>
-								pack size -{' '}
-								{item.packSizeWGT == 0
-									? item.packSizeAMT
-									: `${item.packSizeWGT}g`}
-							</p>
+								<AiOutlineClose
+									className="infoPanelClose"
+									onClick={() => closeInfoPanel()}
+								/>
+							</div>
 							<div
 								className={`itemAmount ${
 									quantChangeLocked ? 'locked' : ''

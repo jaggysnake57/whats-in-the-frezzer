@@ -1,6 +1,6 @@
 .itemsList .itemRow {
   display: grid;
-  grid-template-columns: 2.5fr 4fr 1.5fr 1fr 0.93fr;
+  grid-template-columns: 2.2fr 5fr 1fr 1fr;
   gap: 1rem;
   align-items: center;
   background-color: #5394df;
@@ -16,6 +16,27 @@
 .itemsList .itemRow button {
   font-size: 1.2rem;
   padding: 5px;
+}
+.itemsList .infoButton {
+  background: none;
+  border: solid 1px #f4faff;
+  border-radius: 100px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  cursor: pointer;
+  display: none;
+  color: #f4faff;
+}
+.itemsList .itemInfoWrapper {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}
+.itemsList .infoPanelClose {
+  display: none;
+  font-size: 2.5rem;
+  top: 23%;
+  right: 3%;
 }
 .itemsList .itemAmount {
   display: flex;
@@ -34,4 +55,77 @@
 .itemsList .itemAmount svg {
   font-size: 1.2rem;
   cursor: pointer;
+}
+
+@media (max-width: 1040px) {
+  .itemsList {
+    overflow: hidden;
+  }
+  .itemsList .itemRow {
+    position: relative;
+    grid-template-columns: 1.5fr 0.5fr 1fr 1fr;
+    transition: margin-bottom 0.3s ease-in-out;
+  }
+  .itemsList .itemRow.rowExtend {
+    transition: margin-bottom 0.3s ease-in-out;
+    margin-bottom: 7rem;
+  }
+  .itemsList .itemRow:nth-child(2n) .itemInfoWrapper {
+    background-color: #f4faff;
+    color: #08090a;
+  }
+  .itemsList .itemRow:nth-child(2n) .infoButton {
+    border: solid 1px #08090a;
+    color: #08090a;
+  }
+  .itemsList .infoButton {
+    display: block;
+  }
+  .itemsList .itemInfoWrapper {
+    position: absolute;
+    background-color: #5394df;
+    display: block;
+    width: 100%;
+    left: 0;
+    top: 108%;
+    z-index: -1;
+    padding: 1rem;
+    height: 1px;
+    overflow: hidden;
+    transition: height 0.3s ease-in-out;
+  }
+  .itemsList .itemInfoWrapper p {
+    margin-bottom: 0.5rem;
+  }
+  .itemsList .itemInfoWrapper.infoOpen {
+    overflow: visible;
+    z-index: 0;
+    height: 100px;
+    top: 105%;
+    transition: height 0.3s ease-in-out;
+  }
+  .itemsList .infoPanelClose {
+    display: block;
+    position: absolute;
+  }
+}
+@media (max-width: 650px) {
+  .itemsList .itemRow {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas: "itemName itemName . itemAmount" "infoButton . . ." "editDelete editDelete editDelete editDelete";
+    row-gap: 1.2rem;
+  }
+  .itemsList .itemName {
+    grid-area: itemName;
+  }
+  .itemsList .infoButton {
+    margin-bottom: 1rem;
+    grid-area: infoButton;
+  }
+  .itemsList .btn {
+    grid-area: editDelete;
+  }
+  .itemsList .itemAmount {
+    grid-area: itemAmount;
+  }
 }

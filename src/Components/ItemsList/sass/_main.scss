@@ -3,7 +3,7 @@
 .itemsList {
 	.itemRow {
 		display: grid;
-		grid-template-columns: 2.5fr 4fr 1.5fr 1fr 0.93fr;
+		grid-template-columns: 2.2fr 5fr 1fr 1fr;
 		gap: 1rem;
 		align-items: center;
 		background-color: $mainBlue;
@@ -20,9 +20,32 @@
 			padding: 5px;
 		}
 	}
+
+	.infoButton {
+		background: none;
+		border: solid 1px $white;
+		border-radius: 100px;
+		width: 30px;
+		height: 30px;
+		text-align: center;
+		cursor: pointer;
+		display: none;
+		color: $white;
+	}
+	.itemInfoWrapper {
+		display: grid;
+		grid-template-columns: 3fr 1fr;
+	}
+	.infoPanelClose {
+		display: none;
+		font-size: 2.5rem;
+		top: 23%;
+		right: 3%;
+	}
 	.itemAmount {
 		display: flex;
 		align-items: center;
+
 		&.locked {
 			svg {
 				color: darkgrey;

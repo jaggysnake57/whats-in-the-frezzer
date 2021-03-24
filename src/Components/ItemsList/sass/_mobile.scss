@@ -1,1 +1,27 @@
 @import '../../../vars';
+
+@media (max-width: 650px) {
+	.itemsList {
+		.itemRow {
+			grid-template-columns: 1fr 1fr 1fr 1fr;
+			grid-template-areas:
+				'itemName itemName . itemAmount'
+				'infoButton . . .'
+				'editDelete editDelete editDelete editDelete';
+			row-gap: 1.2rem;
+		}
+		.itemName {
+			grid-area: itemName;
+		}
+		.infoButton {
+			margin-bottom: 1rem;
+			grid-area: infoButton;
+		}
+		.btn {
+			grid-area: editDelete;
+		}
+		.itemAmount {
+			grid-area: itemAmount;
+		}
+	}
+}
