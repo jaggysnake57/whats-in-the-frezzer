@@ -4,7 +4,7 @@
 	form {
 		display: flex;
 		flex-direction: column;
-		width: 60%;
+		width: 70%;
 		max-width: 1000px;
 		margin: 3rem auto;
 		input {
@@ -14,27 +14,29 @@
 			border-radius: 5px;
 			font-size: 1.3rem;
 			padding: 0.5rem;
+			width: 100%;
 		}
 		input[type='file'] {
 			display: none;
 		}
 		.btn {
-			width: 200px;
+			width: 150px;
 			margin-left: auto;
 			font-size: 1.5rem;
 		}
 		.inputGroup {
 			display: grid;
-			grid-template-columns: 2fr 8fr;
+			grid-template-columns: 3fr 7fr;
 			align-items: center;
 			margin-bottom: 2rem;
+			width: 100%;
 			label {
 				font-size: 1.2rem;
 			}
 		}
 		.avatarGroup {
 			position: relative;
-			width: 80%;
+			width: 70%;
 			margin-left: auto;
 			margin-bottom: 2rem;
 			p {

@@ -4,9 +4,6 @@
 .storageForm .buttons {
   margin-left: auto;
 }
-.storageForm .btn {
-  margin-left: 1rem;
-}
 .storageForm form {
   display: flex;
   flex-direction: column;
@@ -36,6 +33,26 @@
   border: none;
 }
 .storageForm form .btn {
-  width: 200px;
+  width: 150px;
+  margin-left: 1rem;
   font-size: 1.5rem;
+}
+
+@media (max-width: 1040px) {
+  .storageForm .buttons {
+    margin-left: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .storageForm form .btn {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
+}
+@media (max-width: 600px) {
+  .storageForm form {
+    width: 90%;
+  }
 }

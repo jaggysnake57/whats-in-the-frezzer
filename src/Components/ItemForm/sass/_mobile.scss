@@ -1,1 +1,21 @@
 @import '../../../vars';
+
+@media (max-width: 600px) {
+	.itemForm {
+		form {
+			width: 90%;
+		}
+	}
+}
+
+@media (max-width: 360px) {
+	.itemForm {
+		form {
+			.toggleSwitch {
+				p {
+					font-size: 1rem;
+				}
+			}
+		}
+	}
+}

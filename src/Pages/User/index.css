@@ -9,6 +9,9 @@
   display: flex;
   justify-content: end;
 }
+.user .rightPane img {
+  width: 100%;
+}
 .user .leftPane h1 {
   margin-bottom: 2rem;
 }
@@ -17,4 +20,26 @@
 }
 .user .leftPane p {
   margin-bottom: 2rem;
+}
+.user .btn {
+  font-size: 1.2rem;
+  width: 150px;
+  display: block;
+}
+
+@media (max-width: 700px) {
+  .user {
+    flex-direction: column;
+  }
+  .user .rightPane {
+    order: 1;
+    margin-bottom: 2rem;
+  }
+  .user .leftPane {
+    order: 2;
+    text-align: center;
+  }
+  .user .btn {
+    width: 100%;
+  }
 }

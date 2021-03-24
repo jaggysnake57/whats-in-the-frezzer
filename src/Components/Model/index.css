@@ -35,3 +35,21 @@
   padding: 0.5rem;
   font-size: 1.5rem;
 }
+
+@media (max-width: 1040px) {
+  .model .modelBox {
+    width: 80%;
+  }
+}
+@media (max-width: 650px) {
+  .model .modelBox {
+    width: 90%;
+    padding: 3rem 1rem;
+  }
+  .model .modelBox p {
+    margin-bottom: 1rem;
+  }
+  .model .buttons {
+    flex-direction: column;
+  }
+}

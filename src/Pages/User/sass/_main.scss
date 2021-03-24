@@ -8,6 +8,9 @@
 	.rightPane {
 		display: flex;
 		justify-content: end;
+		img {
+			width: 100%;
+		}
 	}
 
 	.leftPane {
@@ -20,5 +23,10 @@
 		p {
 			margin-bottom: 2rem;
 		}
+	}
+	.btn {
+		font-size: 1.2rem;
+		width: 150px;
+		display: block;
 	}
 }

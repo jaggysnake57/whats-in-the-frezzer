@@ -156,12 +156,14 @@ const StorageForm = ({ editable, id, editableStorage }) => {
 					{shelfJSX.length ? <h3>Shelf Names</h3> : ''}
 					{shelfJSX}
 					<div className="buttons">
-						<button
-							className="btn btnDanger"
-							type="button"
-							onClick={() => setPopup(true)}>
-							Delete
-						</button>
+						{editable && (
+							<button
+								className="btn btnDanger"
+								type="button"
+								onClick={() => setPopup(true)}>
+								Delete
+							</button>
+						)}
 						<button
 							onClick={(e) => handleReset(e)}
 							className="btn btnWarning">

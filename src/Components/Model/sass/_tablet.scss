@@ -1,1 +1,8 @@
 @import '../../../vars';
+@media (max-width: 1040px) {
+	.model {
+		.modelBox {
+			width: 80%;
+		}
+	}
+}

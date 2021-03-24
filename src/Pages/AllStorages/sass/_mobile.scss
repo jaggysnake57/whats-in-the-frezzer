@@ -1,1 +1,23 @@
 @import '../../../vars';
+
+@media (max-width: 600px) {
+	.allStorages {
+		h1 {
+			text-align: center;
+		}
+		.row {
+			grid-template-columns: 1fr 1fr;
+			row-gap: 1rem;
+			.draws {
+				margin-left: auto;
+			}
+			.shelfNamesContainer {
+				display: none;
+			}
+			.btn {
+				margin-top: 2rem;
+				grid-column: 1 / 3;
+			}
+		}
+	}
+}

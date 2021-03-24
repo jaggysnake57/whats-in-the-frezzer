@@ -1,1 +1,9 @@
 @import '../../../vars';
+
+@media (max-width: 1040px) {
+	.newItem {
+		h1 {
+			text-align: center;
+		}
+	}
+}

@@ -1,1 +1,15 @@
 @import '../../../vars';
+@media (max-width: 650px) {
+	.model {
+		.modelBox {
+			width: 90%;
+			padding: 3rem 1rem;
+			p {
+				margin-bottom: 1rem;
+			}
+		}
+		.buttons {
+			flex-direction: column;
+		}
+	}
+}

@@ -1,1 +1,18 @@
 @import '../../../vars';
+
+@media (max-width: 700px) {
+	.user {
+		flex-direction: column;
+		.rightPane {
+			order: 1;
+			margin-bottom: 2rem;
+		}
+		.leftPane {
+			order: 2;
+			text-align: center;
+		}
+		.btn {
+			width: 100%;
+		}
+	}
+}

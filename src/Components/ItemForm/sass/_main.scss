@@ -39,6 +39,9 @@
 			margin: 0 auto;
 			font-size: 1.2rem;
 		}
+		.toggleLabelTablet {
+			display: none;
+		}
 		select {
 			-webkit-appearance: none;
 			-moz-appearance: none;
@@ -53,7 +56,7 @@
 			margin-left: auto;
 		}
 		.btn {
-			width: 200px;
+			width: 150px;
 			margin-left: 1rem;
 			font-size: 1.5rem;
 		}
@@ -65,8 +68,8 @@
 				right: 1rem;
 				font-size: 1.8rem;
 				color: $white;
-				top: 50%;
-				margin-top: -1.8%;
+				top: 7px;
+
 				border-left: 1px solid $white;
 				padding-left: 1rem;
 				box-sizing: content-box;
@@ -80,7 +83,7 @@
 	display: inline-block;
 	width: 60px;
 	height: 34px;
-	margin: 0 1.7rem;
+	margin: 0 1.2rem;
 }
 
 /* Hide default HTML checkbox */

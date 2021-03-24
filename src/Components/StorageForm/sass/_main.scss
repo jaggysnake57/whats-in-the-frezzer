@@ -7,9 +7,7 @@
 	.buttons {
 		margin-left: auto;
 	}
-	.btn {
-		margin-left: 1rem;
-	}
+
 	form {
 		display: flex;
 		flex-direction: column;
@@ -38,8 +36,8 @@
 			}
 		}
 		.btn {
-			width: 200px;
-
+			width: 150px;
+			margin-left: 1rem;
 			font-size: 1.5rem;
 		}
 	}

@@ -135,7 +135,9 @@ const ItemForm = ({ editable }) => {
 	return (
 		<div className="itemForm">
 			{popup && <Model setPopup={setPopup} id={id} deleteType={'item'} />}
-			{editable && nameValue ? (
+			{editable && !nameValue ? (
+				<h2>nothing found</h2>
+			) : (
 				<div className="formContainer">
 					<form action="" onSubmit={(e) => handleSubmit(e)}>
 						<input
@@ -222,11 +224,14 @@ const ItemForm = ({ editable }) => {
 							</select>
 						</div>
 						<div className="buttons">
-							<button
-								className="btn btnDanger"
-								onClick={() => setPopup(true)}>
-								Delete
-							</button>
+							{editable && (
+								<button
+									className="btn btnDanger"
+									type="button"
+									onClick={() => setPopup(true)}>
+									Delete
+								</button>
+							)}
 							<button
 								onClick={(e) => handleReset(e)}
 								className="btn btnWarning">
@@ -236,8 +241,6 @@ const ItemForm = ({ editable }) => {
 						</div>
 					</form>
 				</div>
-			) : (
-				<h2>nothing found</h2>
 			)}
 		</div>
 	);

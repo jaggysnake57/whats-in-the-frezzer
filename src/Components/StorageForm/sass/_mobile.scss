@@ -1,1 +1,9 @@
 @import '../../../vars';
+
+@media (max-width: 600px) {
+	.storageForm {
+		form {
+			width: 90%;
+		}
+	}
+}

@@ -1,7 +1,7 @@
 .userEdit form {
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 70%;
   max-width: 1000px;
   margin: 3rem auto;
 }
@@ -12,27 +12,29 @@
   border-radius: 5px;
   font-size: 1.3rem;
   padding: 0.5rem;
+  width: 100%;
 }
 .userEdit form input[type=file] {
   display: none;
 }
 .userEdit form .btn {
-  width: 200px;
+  width: 150px;
   margin-left: auto;
   font-size: 1.5rem;
 }
 .userEdit form .inputGroup {
   display: grid;
-  grid-template-columns: 2fr 8fr;
+  grid-template-columns: 3fr 7fr;
   align-items: center;
   margin-bottom: 2rem;
+  width: 100%;
 }
 .userEdit form .inputGroup label {
   font-size: 1.2rem;
 }
 .userEdit form .avatarGroup {
   position: relative;
-  width: 80%;
+  width: 70%;
   margin-left: auto;
   margin-bottom: 2rem;
 }
@@ -64,4 +66,26 @@
 .userEdit form .avatarGroup img:hover + p {
   transition: opacity 0.3s;
   opacity: 1;
+}
+
+@media (max-width: 850px) {
+  .userEdit h1 {
+    text-align: center;
+  }
+  .userEdit form {
+    width: 90%;
+  }
+  .userEdit form .inputGroup {
+    grid-template-columns: 1fr;
+  }
+  .userEdit form .avatarGroup {
+    width: 100%;
+  }
+  .userEdit form .avatarGroup p {
+    background-color: #08090a;
+    opacity: 1;
+  }
+  .userEdit form .btn {
+    width: 100%;
+  }
 }

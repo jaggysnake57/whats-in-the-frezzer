@@ -3,7 +3,7 @@
 }
 .allStorages .row {
   display: grid;
-  grid-template-columns: 3fr 3fr 2fr 1fr;
+  grid-template-columns: 2fr 2fr 2fr 1fr;
   align-items: center;
   background-color: #5394df;
   color: #f4faff;
@@ -42,4 +42,24 @@
 }
 .allStorages .open {
   display: block;
+}
+
+@media (max-width: 600px) {
+  .allStorages h1 {
+    text-align: center;
+  }
+  .allStorages .row {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 1rem;
+  }
+  .allStorages .row .draws {
+    margin-left: auto;
+  }
+  .allStorages .row .shelfNamesContainer {
+    display: none;
+  }
+  .allStorages .row .btn {
+    margin-top: 2rem;
+    grid-column: 1/3;
+  }
 }

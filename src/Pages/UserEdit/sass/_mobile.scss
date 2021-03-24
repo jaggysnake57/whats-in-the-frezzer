@@ -1,1 +1,24 @@
 @import '../../../vars';
+@media (max-width: 850px) {
+	.userEdit {
+		h1 {
+			text-align: center;
+		}
+		form {
+			width: 90%;
+			.inputGroup {
+				grid-template-columns: 1fr;
+			}
+			.avatarGroup {
+				width: 100%;
+				p {
+					background-color: $black;
+					opacity: 1;
+				}
+			}
+			.btn {
+				width: 100%;
+			}
+		}
+	}
+}

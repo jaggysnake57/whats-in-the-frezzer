@@ -29,7 +29,7 @@ const AllStorages = () => {
 			{storages?.map((store) => (
 				<div className="row">
 					<h2>{store?.name}</h2>
-					<p>draws - {store.shelfNum}</p>
+					<p className="draws">draws - {store.shelfNum}</p>
 					<div className="shelfNamesContainer">
 						<p onClick={(e) => handleShelfDropdown(e)}>
 							Shelf Names

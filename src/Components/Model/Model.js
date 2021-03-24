@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteItem } from '../../features/items/itemsSlice';
 import { deleteStorage } from '../../features/storages/storageSlice';
 import { selectUser } from '../../features/user/userSlice';
+import './index.css';
 
 const Model = ({ setPopup, id, deleteType }) => {
 	const { userDocId } = useSelector(selectUser);
