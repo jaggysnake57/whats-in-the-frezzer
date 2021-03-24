@@ -1,1 +1,8 @@
 @import '../../../vars';
+@media (max-width: 1040px) {
+	.toolbar {
+		button.btn {
+			width: 30%;
+		}
+	}
+}

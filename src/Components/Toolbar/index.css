@@ -3,6 +3,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
+  padding: 0.4rem 0 0.4rem 0.4rem;
 }
 .toolbar .searchBar {
   width: 40%;
@@ -16,6 +17,13 @@
   background-color: #5394df;
   font-size: 1rem;
   color: #f4faff;
+}
+.toolbar .searchInput:focus {
+  border: 0;
+  box-shadow: 0 0 0 3px #315d8f;
+}
+.toolbar .searchInput:focus-visible {
+  outline: none;
 }
 .toolbar .filterBar {
   display: flex;
@@ -54,4 +62,39 @@
   width: 10%;
   font-size: 1.2rem;
   margin-right: 8px;
+}
+
+::-moz-focus-inner {
+  border: 0;
+}
+
+::-moz-focus-outer {
+  border: 0;
+}
+
+@media (max-width: 1040px) {
+  .toolbar button.btn {
+    width: 30%;
+  }
+}
+@media (max-width: 650px) {
+  .toolbar {
+    display: grid;
+  }
+  .toolbar .searchBar {
+    width: 100%;
+    grid-column: 1/5;
+    margin-bottom: 1rem;
+  }
+  .toolbar .searchBar input {
+    width: 100%;
+  }
+  .toolbar .filterBar {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .toolbar button.btn {
+    width: 100%;
+  }
 }
